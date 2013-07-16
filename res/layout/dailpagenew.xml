@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="66.0dip"
+        android:layout_marginTop="1.0dip" >
+
+        <EditText
+            android:id="@+id/p_digits"
+            android:layout_width="fill_parent"
+            android:layout_height="66.0dip"
+            android:layout_marginBottom="5.0px"
+            android:layout_marginLeft="3.0px"
+            android:layout_marginRight="3.0px"
+            android:layout_marginTop="3.0px"
+            android:background="@drawable/btn_dial_textfield_normal_full"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:freezesText="true"
+            android:maxLines="1"
+            android:gravity="center"
+            android:paddingLeft="16.0px"
+            android:paddingRight="16.0px"
+            android:scrollHorizontally="true"
+            android:textColor="#ffffffff"
+            android:textSize="28.0sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4.0dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/pone"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_1" />
+
+            <ImageButton
+                android:id="@+id/ptwo"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_2" />
+
+            <ImageButton
+                android:id="@+id/pthree"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/pfour"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_4" />
+
+            <ImageButton
+                android:id="@+id/pfive"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_5" />
+
+            <ImageButton
+                android:id="@+id/psix"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/pseven"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_7" />
+
+            <ImageButton
+                android:id="@+id/penight"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_8" />
+
+            <ImageButton
+                android:id="@+id/pnine"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_9" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/pmi"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_star" />
+
+            <ImageButton
+                android:id="@+id/p0"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_0" />
+
+            <ImageButton
+                android:id="@+id/pjing"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_dial"
+                android:src="@drawable/dial_num_pound" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/psearch"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/p_search" />
+
+            <ImageButton
+                android:id="@+id/pphone"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/p_phone" />
+
+            <ImageButton
+                android:id="@+id/pdel"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dialpad_number_width"
+                android:layout_height="60dp"
+                android:background="@drawable/p_del" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
