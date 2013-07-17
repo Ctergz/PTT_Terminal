@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zzy.ptt.R;
@@ -44,48 +44,49 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 
 	private static DialActivity instance;
 
-	private ImageButton btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9, btnNum0,
-			btnNumStart, btnNumPound, btnNumDelete,btnSoundCall,BtnSearch;
+	private ImageView btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6,
+			btnNum7, btnNum8, btnNum9, btnNum0, btnNumStart, btnNumPound,
+			btnNumDelete, btnSoundCall, BtnSearch;
 	private EditText dailNumEditText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.dailpagenew);
+		setContentView(R.layout.activity_calling_main);
 
 		PTTUtil.getInstance().initOnCreat(this);
 
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		instance = this;
 		initWeigets();
 	}
 
 	public void initWeigets() {
-		btnNum1 = (ImageButton) findViewById(R.id.pone);
-		btnNum2 = (ImageButton) findViewById(R.id.ptwo);
-		btnNum3 = (ImageButton) findViewById(R.id.pthree);
-		btnNum4 = (ImageButton) findViewById(R.id.pfour);
-		btnNum5 = (ImageButton) findViewById(R.id.pfive);
-		btnNum6 = (ImageButton) findViewById(R.id.psix);
-		btnNum7 = (ImageButton) findViewById(R.id.pseven);
-		btnNum8 = (ImageButton) findViewById(R.id.penight);
-		btnNum9 = (ImageButton) findViewById(R.id.pnine);
-		btnNumStart = (ImageButton) findViewById(R.id.pmi);
-		btnNum0 = (ImageButton) findViewById(R.id.p0);
-		btnNumPound = (ImageButton) findViewById(R.id.pjing);
-		btnNumDelete = (ImageButton) findViewById(R.id.pdel);
-		btnSoundCall = (ImageButton) findViewById(R.id.pphone);
-		BtnSearch = (ImageButton) findViewById(R.id.psearch);
+		btnNum1 = (ImageView) findViewById(R.id.pone);
+		btnNum2 = (ImageView) findViewById(R.id.ptwo);
+		btnNum3 = (ImageView) findViewById(R.id.pthree);
+		btnNum4 = (ImageView) findViewById(R.id.pfour);
+		btnNum5 = (ImageView) findViewById(R.id.pfive);
+		btnNum6 = (ImageView) findViewById(R.id.psix);
+		btnNum7 = (ImageView) findViewById(R.id.pseven);
+		btnNum8 = (ImageView) findViewById(R.id.penight);
+		btnNum9 = (ImageView) findViewById(R.id.pnine);
+		btnNumStart = (ImageView) findViewById(R.id.pmi);
+		btnNum0 = (ImageView) findViewById(R.id.p0);
+		btnNumPound = (ImageView) findViewById(R.id.pjing);
+		btnNumDelete = (ImageView) findViewById(R.id.pdel);
+		btnSoundCall = (ImageView) findViewById(R.id.pphone);
+		BtnSearch = (ImageView) findViewById(R.id.psearch);
 
 		dailNumEditText = (EditText) findViewById(R.id.p_digits);
-		int oldnum=DailService.getInstance().strNumber;
-		if(oldnum!=-1)
-		{
-			String str=Integer.toString(oldnum);
+		int oldnum = DailService.getInstance().strNumber;
+		if (oldnum != -1) {
+			String str = Integer.toString(oldnum);
 			dailNumEditText.setText(str);
 			dailNumEditText.setSelection(str.length());
-			DailService.getInstance().strNumber=-1;
+			DailService.getInstance().strNumber = -1;
 		}
 
 		btnNum1.setOnClickListener(this);
@@ -106,7 +107,7 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void makeCall() {
-		
+
 		final String strNum = dailNumEditText.getText().toString();
 		Log.d(LOG_TAG, ">>>>>>>>>>>>>>>>>>>>>>>>>Dial num : " + strNum);
 		// check number
@@ -114,13 +115,12 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 			AlertDialogManager.getInstance().toastNumberNull();
 			return;
 		}
-		
+
 		CallState myCallState = new CallState();
 		myCallState.setNumber(strNum);
 		myCallState.setCallState(PTTConstant.CALL_DIALING);
 		CallStateManager.getInstance().setCurrentCallState(myCallState);
 
-		
 		Intent intent = new Intent();
 		intent.setClass(this, InCallScreenActivity.class);
 		startActivity(intent);
@@ -129,7 +129,7 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 		numberInfo.setNumber(strNum);
 		numberInfo.setNumberType(PTTConstant.NUMBER_DIGIT);
 		numberInfo.setPttType(PTTConstant.PTT_SINGLE);
-		
+
 		try {
 			SipProxy.getInstance().RequestMakeCall(numberInfo);
 		} catch (PTTException e) {
@@ -149,68 +149,68 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	@Override  
-	public boolean dispatchKeyEvent(KeyEvent event) {  
 
-       if(event.getAction() == KeyEvent.ACTION_DOWN)
-       {
-            if(event.getRepeatCount() == 0) 
-            {  
-            	Log.d(LOG_TAG, "onKeyDown  KEYCODE_BACK keyCode"+ event.getKeyCode());
-            	//具体的操作代码
-        		StringBuilder sb=new StringBuilder();
-        		sb.append(dailNumEditText.getText().toString());
-        		switch (event.getKeyCode()) 
-        		{
-        		case 8:
-        			sb.append("1");
-        			break;
-        		case 9:
-        			sb.append("2");
-        			break;
-        		case 10:
-        			sb.append("3");
-        			break;
-        		case 11:
-        			sb.append("4");
-        			break;
-        		case 12:
-        			sb.append("5");
-        			break;
-        		case 13:
-        			sb.append("6");
-        			break;
-        		case 14:
-        			sb.append("7");
-        			break;
-        		case 15:
-        			sb.append("8");
-         			break;
-        		case 16:
-        			sb.append("9");
-        			break;
-        		case 7:
-        			sb.append("0");
-        			break;
-        		case 17:
-        			sb.append("*");
-        			break;
-        		case 18:
-        			sb.append("#");
-        			break;
-        		case 5:
-        			makeCall();
-        			break;
-        		default:
-        			return super.dispatchKeyEvent(event);  
-        		}
-    			dailNumEditText.setText(sb);
-    			dailNumEditText.setSelection(sb.length());
-            	return true;
-            }
-       }	    
-	    return super.dispatchKeyEvent(event);  
-	}  
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+
+		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (event.getRepeatCount() == 0) {
+				Log.d(LOG_TAG,
+						"onKeyDown  KEYCODE_BACK keyCode" + event.getKeyCode());
+				// 具体的操作代码
+				StringBuilder sb = new StringBuilder();
+				sb.append(dailNumEditText.getText().toString());
+				switch (event.getKeyCode()) {
+				case 8:
+					sb.append("1");
+					break;
+				case 9:
+					sb.append("2");
+					break;
+				case 10:
+					sb.append("3");
+					break;
+				case 11:
+					sb.append("4");
+					break;
+				case 12:
+					sb.append("5");
+					break;
+				case 13:
+					sb.append("6");
+					break;
+				case 14:
+					sb.append("7");
+					break;
+				case 15:
+					sb.append("8");
+					break;
+				case 16:
+					sb.append("9");
+					break;
+				case 7:
+					sb.append("0");
+					break;
+				case 17:
+					sb.append("*");
+					break;
+				case 18:
+					sb.append("#");
+					break;
+				case 5:
+					makeCall();
+					break;
+				default:
+					return super.dispatchKeyEvent(event);
+				}
+				dailNumEditText.setText(sb);
+				dailNumEditText.setSelection(sb.length());
+				return true;
+			}
+		}
+		return super.dispatchKeyEvent(event);
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -282,8 +282,9 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 		case R.id.pphone:
 			if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS) {
 				makeCall();
-			}else{
-				Toast.makeText(instance, getString(R.string.register_not), Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(instance, getString(R.string.register_not),
+						Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.psearch:
@@ -303,6 +304,7 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
