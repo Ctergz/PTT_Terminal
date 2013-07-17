@@ -513,12 +513,12 @@ public class PTTActivity extends BaseActivity {
 			return sb.toString();
 		}
 	}
-	@Override
-	/**
-	 * disable KEYCODE_HOME
-	 */
-	public void onAttachedToWindow() {
-		this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
-	}
+//	@Override
+//	/**
+//	 * disable KEYCODE_HOME
+//	 */
+//	public void onAttachedToWindow() {
+//		this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD);
+//	}
 
 }
