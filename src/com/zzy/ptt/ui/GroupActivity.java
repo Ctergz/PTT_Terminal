@@ -361,7 +361,7 @@ public class GroupActivity extends BaseActivity {
 		}
 
 		public TextView getGenericView() {
-			ListView.LayoutParams lp = new ListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 80);
+			ListView.LayoutParams lp = new ListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 80);
 			TextView textView = new TextView(GroupActivity.this);
 			textView.setLayoutParams(lp);
 			textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);

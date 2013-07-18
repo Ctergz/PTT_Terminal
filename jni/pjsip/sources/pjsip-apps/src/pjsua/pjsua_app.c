@@ -30,7 +30,7 @@
 
 //added by lxd
 #define ZZY_PTT_MSG_TYPE     "application"
-#define ZZY_PTT_MSG_SUBTYPE  "woaisis-ptt"
+#define ZZY_PTT_MSG_SUBTYPE  "woasis-ptt"
 #define PTT_REG_INTERVAL        300
 
 //end add

@@ -2031,7 +2031,7 @@ static pj_status_t pjsua_regc_init(int acc_id)
 	pjsip_hdr hdr_list;
 	const pj_str_t STR_USER_AGENT = { "User-Agent", 10 };
 #ifdef PJSIP_EXTEND_ZZY
-	const pj_str_t STR_USER_AGENT_VALUE = { "ZZY-PTT", 10 };
+	const pj_str_t STR_USER_AGENT_VALUE = { "WOASIS-PTT", 10 };
 #endif
 	pjsip_generic_string_hdr *h;
 
