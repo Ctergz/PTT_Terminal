@@ -30,7 +30,7 @@
 
 //added by lxd
 #define ZZY_PTT_MSG_TYPE     "application"
-#define ZZY_PTT_MSG_SUBTYPE  "zzy-ptt"
+#define ZZY_PTT_MSG_SUBTYPE  "woaisis-ptt"
 #define PTT_REG_INTERVAL        300
 
 //end add
@@ -3363,7 +3363,7 @@ static void on_pager2(pjsua_call_id call_id, const pj_str_t *from,
        PJ_LOG(3,(THIS_FILE, "deal as sms"));
        do_receive_sms(from, body);
     }
-    else if(!pj_ansi_strncmp("application/zzy-ptt" , mime_type->ptr, mime_type->slen))
+    else if(!pj_ansi_strncmp("application/woasis-ptt" , mime_type->ptr, mime_type->slen))
     {
        //deal as ptt message
        PJ_LOG(3,(THIS_FILE, "deal as ptt message"));
