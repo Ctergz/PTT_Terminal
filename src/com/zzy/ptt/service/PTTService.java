@@ -59,6 +59,7 @@ import com.zzy.ptt.ui.AlertActivity;
 import com.zzy.ptt.ui.InCallScreenActivity;
 import com.zzy.ptt.ui.MainPageActivity;
 import com.zzy.ptt.ui.PTTActivity;
+import com.zzy.ptt.ui.StartActivity;
 import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
@@ -411,7 +412,7 @@ public class PTTService extends Service {
 				}
 				break;
 			case PTTConstant.COMM_START_APP:
-				Intent intent2 = new Intent(this, MainPageActivity.class);
+				Intent intent2 = new Intent(this, StartActivity.class);
 				intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent2);
 				break;

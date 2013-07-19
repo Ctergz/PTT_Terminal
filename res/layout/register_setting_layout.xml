@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:orientation="vertical" >
-            
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -25,9 +25,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="" />
-
             </LinearLayout>
-
+
             <LinearLayout
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
@@ -39,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tview_setting_server"
                     android:textSize="20sp" />
-
+
                 <EditText
                     android:id="@+id/et_serverip1"
                     android:layout_width="match_parent"
@@ -51,8 +50,8 @@
                     <requestFocus />
                 </EditText>
             </LinearLayout>
-            
-                        <LinearLayout
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,7 +62,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:text="" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -89,6 +87,7 @@
                     android:textSize="20sp" >
                 </EditText>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +99,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:text="" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -126,6 +124,7 @@
                     android:textSize="20sp" >
                 </EditText>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -137,7 +136,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:text="" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -170,14 +168,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal" >
-
+
                 <CheckBox
                     android:id="@+id/cb_autoregister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/checkbox_setting_autoregister" />
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -189,13 +187,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="" />
-
+
                 <Button
                     android:id="@+id/btn_regi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_reregister" />
-
             </LinearLayout>
         </LinearLayout>
     </HorizontalScrollView>

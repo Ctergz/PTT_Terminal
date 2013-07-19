@@ -13,6 +13,7 @@ package com.zzy.ptt.ui;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -30,12 +31,11 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.Window;
-import android.widget.Button;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzy.ptt.R;
@@ -49,13 +49,8 @@ import com.zzy.ptt.service.StateManager.EnumRegByWho;
 import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
-public class MainPageActivity extends BaseActivity implements OnFocusChangeListener, View.OnClickListener {
-
-	private static final int MENU_REGISTER = 0;
-	private static final int MENU_MINI = 1;
-	private static final int MENU_EXIT = 2;
-	private static final int MENU_RETURN_PTT = 3;
-	private static final int MENU_TEST = 4;
+public class MainPageActivity extends Activity implements
+		View.OnClickListener {
 
 	private ProgressDialog initProgressDialog;
 	private ProgressDialog regProgressDialog;
@@ -72,10 +67,13 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 	private static final int MSG_DEINIT_START = 2;
 	private static final int MSG_DEINIT_OVER = 3;
 
-//	private PTTManager pttManager = PTTManager.getInstance();
+	// private PTTManager pttManager = PTTManager.getInstance();
 
-	private Button btnqz, btnbh, btnjl, btntxl, btnxx, btnsz;
-	private TextView statusTV;
+	private TextView statusTV, statusTV1;
+	private ImageView registerImage, setImage, aboutImage, exitImage;
+	private RelativeLayout groupLinearLayout, daiLinearLayout,
+			calllogLinearLayout, contactLinearLayout, messageLinearLayout,
+			setLinearLayout;
 
 	public static MainPageActivity instance = null;
 
@@ -84,18 +82,19 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 
 	public Handler mainPageHandler = new Handler() {
 
-		
 		public void handleMessage(Message msg) {
 
 			Bundle bundle = null;
 			int errorCode = -1;
-			AlertDialogManager.getInstance().dismissProgressDialog(initProgressDialog);
+			AlertDialogManager.getInstance().dismissProgressDialog(
+					initProgressDialog);
 			switch (msg.what) {
 			case MSG_DEINIT_START:
 				stopService(new Intent(MainPageActivity.this, PTTService.class));
 				break;
 			case MSG_DEINIT_OVER:
-				if (deInitProgressDialog != null && deInitProgressDialog.isShowing()) {
+				if (deInitProgressDialog != null
+						&& deInitProgressDialog.isShowing()) {
 					deInitProgressDialog.dismiss();
 				}
 				StateManager.reset();
@@ -108,21 +107,28 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 			case MSG_INIT_FAIL:
 				bundle = msg.getData();
 				errorCode = bundle.getInt(MSG_KEY);
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainPageActivity.this);
-				builder.setTitle(MainPageActivity.this.getString(R.string.alert_title_init));
-				builder.setMessage(MainPageActivity.this.getString(R.string.alert_msg_init_fail) + " : " + errorCode);
-				builder.setNeutralButton(R.string.alert_btn_ok, new OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						// MainPageActivity.this.finish();
-					}
-				});
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MainPageActivity.this);
+				builder.setTitle(MainPageActivity.this
+						.getString(R.string.alert_title_init));
+				builder.setMessage(MainPageActivity.this
+						.getString(R.string.alert_msg_init_fail)
+						+ " : "
+						+ errorCode);
+				builder.setNeutralButton(R.string.alert_btn_ok,
+						new OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+								// MainPageActivity.this.finish();
+							}
+						});
 
 				AlertDialog alert = builder.create();
 				alert.setCancelable(false);
 				alert.setOnDismissListener(new OnDismissListener() {
-					
+
 					public void onDismiss(DialogInterface dialog) {
 						MainPageActivity.this.finish();
 					}
@@ -150,7 +156,6 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 			context.registerReceiver(this, filter);
 		}
 
-		
 		public void onReceive(Context context, Intent intent) {
 			int state = -1;
 			String action = intent.getAction();
@@ -158,30 +163,32 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 			Log.d(LOG_TAG, "<<<<<<<<<<<Receive action : " + action);
 			if (PTTConstant.ACTION_REGISTER.equals(action)) {
 
-				if (regProgressDialog != null) {
-					AlertDialogManager.getInstance().dismissProgressDialog(regProgressDialog);
+				if (regProgressDialog != null && regProgressDialog.isShowing()) {
+					regProgressDialog.dismiss();
 				}
 				// register state
 				state = intent.getIntExtra(PTTConstant.KEY_REGISTER_STATE, 0);
 				Log.d(LOG_TAG, "<<<<<<<<<<<Receive register state : " + state);
 				// show title info
-				if(!StateManager.exitFlag)
+				if (!StateManager.exitFlag)
 					showTitle(state);
-				
-				if(PTTConstant.DUMMY) {
+
+				if (PTTConstant.DUMMY) {
 					GroupInfo[] groupInfos = new GroupInfo[1];
 					groupInfos[0] = new GroupInfo("dummy", "9000");
 					PTTService.instance.JNIAddGroupInfo(groupInfos);
 				}
 
-			} else if (PTTConstant.ACTION_INIT.equals(action)) {
+			}else if (PTTConstant.ACTION_INIT.equals(action)) {
 				// init state
-				int initState = intent.getIntExtra(PTTConstant.KEY_INIT_STATE, 0);
+				int initState = intent.getIntExtra(PTTConstant.KEY_INIT_STATE,
+						0);
 				Log.d(LOG_TAG, "<<<<<<<<<<<Receive init state : " + initState);
 				if (initState == PTTConstant.INIT_SUCCESS) {
 					mainPageHandler.sendEmptyMessage(MSG_INIT_SUCCESS);
 				} else {
-					int errorCode = intent.getIntExtra(PTTConstant.KEY_RETURN_VALUE, 0);
+					int errorCode = intent.getIntExtra(
+							PTTConstant.KEY_RETURN_VALUE, 0);
 					Message msg = new Message();
 					msg.what = MSG_INIT_FAIL;
 					Bundle tempBundle = new Bundle();
@@ -192,8 +199,10 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 				// init state
 				int keyCode = intent.getIntExtra(PTTConstant.KEY_NUMBER, 0);
 				Log.d(LOG_TAG, "()()()()()()()(keyCode : " + keyCode);
-				if (keyCode >= KeyEvent.KEYCODE_0 && keyCode <= KeyEvent.KEYCODE_9) {
-					Intent intent2 = new Intent(MainPageActivity.this, DialActivity.class);
+				if (keyCode >= KeyEvent.KEYCODE_0
+						&& keyCode <= KeyEvent.KEYCODE_9) {
+					Intent intent2 = new Intent(MainPageActivity.this,
+							DialActivity.class);
 					intent2.putExtra("OK", 123);
 					intent2.putExtra("keyCode", (keyCode - 7) + "");
 					startActivity(intent2);
@@ -207,27 +216,32 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 			}
 		}
 	}
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.mainpage);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.mainpagenew);
 
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 
 		initButtons();
 		statusTV = (TextView) findViewById(R.id.maintextView1);
+		statusTV1 = (TextView) findViewById(R.id.maintextView2);
 		// show menu items
 		PTTUtil.getInstance().initOnCreat(this);
 		// prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// show init dialog
 		if (StateManager.getInitState() != PTTConstant.INIT_SUCCESS) {
-			initProgressDialog = AlertDialogManager.getInstance().showProgressDialog(this,
-					getString(R.string.alert_title_init), getString(R.string.alert_msg_initing));
+			initProgressDialog = AlertDialogManager.getInstance()
+					.showProgressDialog(this,
+							getString(R.string.alert_title_init),
+							getString(R.string.alert_msg_initing));
 		}
 		Intent intent = new Intent(MainPageActivity.this, PTTService.class);
-		//intent.setAction(PTTConstant.ACTION_INIT);
+		// intent.setAction(PTTConstant.ACTION_INIT);
 		startService(intent);
 
 		instance = this;
@@ -238,53 +252,45 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PTTConstant.ACTION_DYNAMIC_REGRP);
 		this.registerReceiver(groupReceiver, filter);
-		
+
 		if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS) {
 			Intent intentTOHO = new Intent("com.zzy.action.start");
 			sendBroadcast(intentTOHO);
 		}
-		
+
 	}
 
 	private class GroupReceiver extends BroadcastReceiver {
-		
+
 		public void onReceive(Context context, Intent intent) {
 			updateReisterInfo();
 		}
 	}
 
 	private void initButtons() {
-		btnqz = (Button) findViewById(R.id.mainbutton1);
-		btnbh = (Button) findViewById(R.id.mainbutton2);
-		btnjl = (Button) findViewById(R.id.mainbutton3);
-		btntxl = (Button) findViewById(R.id.mainbutton4);
-		btnxx = (Button) findViewById(R.id.mainbutton5);
-		btnsz = (Button) findViewById(R.id.mainbutton6);
+		registerImage = (ImageView) findViewById(R.id.imageRegister);
+		setImage = (ImageView) findViewById(R.id.imageSet);
+		aboutImage = (ImageView) findViewById(R.id.imageAbout);
+		exitImage = (ImageView) findViewById(R.id.imageExit);
 
-		btnqz.setOnFocusChangeListener(this);
-		btnqz.setOnClickListener(this);
+		groupLinearLayout = (RelativeLayout) findViewById(R.id.group);
+		daiLinearLayout = (RelativeLayout) findViewById(R.id.dail);
+		calllogLinearLayout = (RelativeLayout) findViewById(R.id.calllog);
+		contactLinearLayout = (RelativeLayout) findViewById(R.id.contact);
+		messageLinearLayout = (RelativeLayout) findViewById(R.id.message);
+		setLinearLayout = (RelativeLayout) findViewById(R.id.ptt);
 
-		btnbh.setOnFocusChangeListener(this);
-		btnbh.setOnClickListener(this);
+		groupLinearLayout.setOnClickListener(this);
+		daiLinearLayout.setOnClickListener(this);
+		calllogLinearLayout.setOnClickListener(this);
+		contactLinearLayout.setOnClickListener(this);
+		messageLinearLayout.setOnClickListener(this);
+		setLinearLayout.setOnClickListener(this);
 
-		btnjl.setOnFocusChangeListener(this);
-		btnjl.setOnClickListener(this);
-
-		btntxl.setOnFocusChangeListener(this);
-		btntxl.setOnClickListener(this);
-
-		btnxx.setOnFocusChangeListener(this);
-		btnxx.setOnClickListener(this);
-
-		btnsz.setOnFocusChangeListener(this);
-		btnsz.setOnClickListener(this);
-
-		btnqz.setBackgroundResource(R.drawable.qunzu5);
-		btnbh.setBackgroundResource(R.drawable.bohao05);
-		btnjl.setBackgroundResource(R.drawable.jilu5);
-		btntxl.setBackgroundResource(R.drawable.tongxunlu5);
-		btnxx.setBackgroundResource(R.drawable.xx5);
-		btnsz.setBackgroundResource(R.drawable.shezhi5);
+		registerImage.setOnClickListener(this);
+		setImage.setOnClickListener(this);
+		aboutImage.setOnClickListener(this);
+		exitImage.setOnClickListener(this);
 	}
 
 	private void showTitle(int state) {
@@ -305,11 +311,11 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 		}
 		if (state == PTTConstant.REG_ED) {
 			titleInfo = PTTUtil.getInstance().getCurrentUserName(this);
-			statusTV.setText(getApplicationContext().getString(R.string.current_group) + curGrp + "  "
-					+ getApplicationContext().getString(R.string.current_num) + titleInfo);
+			statusTV.setText(getApplicationContext().getString(R.string.current_group)+ curGrp);
+			statusTV1.setText(getApplicationContext().getString(R.string.current_num)+ titleInfo);
 		} else {
 			titleInfo = getString(PTTUtil.getInstance().getTitleId(state));
-			statusTV.setText(titleInfo);
+			statusTV1.setText(titleInfo);
 		}
 	}
 
@@ -332,11 +338,12 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 
 		if (currentState == EnumLoginState.REGISTERE_SUCCESS) {
 			titleInfo = PTTUtil.getInstance().getCurrentUserName(this);
-			statusTV.setText(getApplicationContext().getString(R.string.current_group) + curGrp + "  "
-					+ getApplicationContext().getString(R.string.current_num) + titleInfo);
+			statusTV.setText(getApplicationContext().getString(R.string.current_group)+ curGrp);
+			statusTV1.setText(getApplicationContext().getString(R.string.current_num)+ titleInfo);
 		} else {
-			titleInfo = getString(PTTUtil.getInstance().getTitleId(currentState));
-			statusTV.setText(titleInfo);
+			titleInfo = getString(PTTUtil.getInstance()
+					.getTitleId(currentState));
+			statusTV1.setText(titleInfo);
 		}
 	}
 
@@ -351,16 +358,21 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 	private void doRegister() {
 		// start to register and show progress dialog
 		Log.d(LOG_TAG,
-				"doRegister regstate : " + PTTUtil.getInstance().getRegStateString(StateManager.getCurrentRegState()));
+				"doRegister regstate : "
+						+ PTTUtil.getInstance().getRegStateString(
+								StateManager.getCurrentRegState()));
 		if (StateManager.getCurrentRegState() != EnumLoginState.REGISTERE_SUCCESS) {
 
-			regProgressDialog = AlertDialogManager.getInstance().showProgressDialog(this,
-					getString(R.string.alert_title_register), getString(R.string.alert_msg_registering));
+			regProgressDialog = AlertDialogManager.getInstance()
+					.showProgressDialog(this,
+							getString(R.string.alert_title_register),
+							getString(R.string.alert_msg_registering));
 			regProgressDialog.setOnCancelListener(new OnCancelListener() {
-				
+
 				public void onCancel(DialogInterface dialog) {
 					if (StateManager.getCurrentRegState() != EnumLoginState.REGISTERE_SUCCESS) {
-						StateManager.setCurrentRegState(EnumLoginState.UNREGISTERED);
+						StateManager
+								.setCurrentRegState(EnumLoginState.UNREGISTERED);
 						showTitle(EnumLoginState.UNREGISTERED);
 					}
 				}
@@ -375,7 +387,6 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 		}
 	}
 
-	
 	protected void onDestroy() {
 		super.onDestroy();
 		instance = null;
@@ -398,104 +409,59 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 			this.unregisterReceiver(registerReceiver);
 	}
 
-	
-	public boolean onCreateOptionsMenu(Menu menu) {
-		int order = 0;
-
-		menu.clear();
-
-		if (StateManager.getCurrentRegState() == EnumLoginState.ERROR_CODE_NUMBER
-				|| StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
-			menu.add(0, MENU_REGISTER, order++, R.string.menu_register);
-		}
-		//if (pttManager.getCurrentPttState().getStatus() != PTTConstant.PTT_IDLE) {
-		//}
-		menu.add(0, MENU_RETURN_PTT, order++, R.string.menu_return_ptt);
-		menu.add(0, MENU_MINI, order++, R.string.menu_minialmize);
-		menu.add(0, MENU_EXIT, order++, R.string.menu_exit);
-		menu.add(0, MENU_TEST, order++, R.string.aboutpyy);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		switch (itemId) {
-		case MENU_TEST:
-			startActivity(new Intent(getApplicationContext(), AboutActivity.class));
-			break;
-		case MENU_EXIT:
-			StateManager.stopNotification();
-			destorySipStack();
-			break;
-		case MENU_MINI:
-			this.finish();
-			break;
-		case MENU_RETURN_PTT:
-//			if (pttManager.getCurrentPttState().getStatus() == PTTConstant.PTT_IDLE) {
-//				AlertDialogManager.getInstance().toastNoPtt();
-//				return true;
-//			}
-			Intent intent = new Intent(this, PTTActivity.class);
-			intent.setAction(PTTConstant.ACTION_PTT);
-			this.startActivity(intent);
-			break;
-		case MENU_REGISTER:
-			doRegister();
-			break;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	
 	protected void onResume() {
 		super.onResume();
-		
+
 		instance = this;
-		
+
 		registerReceiverAction();
 		Log.d(LOG_TAG, "onResume");
 
 		// update register info
 		updateReisterInfo();
 
-		if (StateManager.getInitState() == PTTConstant.INIT_SUCCESS && initProgressDialog != null
-				&& initProgressDialog.isShowing()) {
+		if (StateManager.getInitState() == PTTConstant.INIT_SUCCESS
+				&& initProgressDialog != null && initProgressDialog.isShowing()) {
 			initProgressDialog.dismiss();
 			if (StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
 				doRegister();
 			}
 		}
 
-		if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS && regProgressDialog != null
-				&& regProgressDialog.isShowing()) {
+		if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS
+				&& regProgressDialog != null && regProgressDialog.isShowing()) {
 			regProgressDialog.dismiss();
 		}
-		
+
 		int iCallState = CallStateManager.getInstance().getCallState();
-		if (iCallState >= PTTConstant.CALL_DIALING && iCallState <= PTTConstant.CALL_TALKING) {
-			Intent intent = new Intent(this,InCallScreenActivity.class);
+		if (iCallState >= PTTConstant.CALL_DIALING
+				&& iCallState <= PTTConstant.CALL_TALKING) {
+			Intent intent = new Intent(this, InCallScreenActivity.class);
 			startActivity(intent);
+		}
+
+		if (StateManager.getCurrentRegState() == EnumLoginState.ERROR_CODE_NUMBER
+				|| StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
+			registerImage.setVisibility(View.VISIBLE);
+		}else {
+			registerImage.setVisibility(View.INVISIBLE);
 		}
 	}
 
-	
 	protected void onPause() {
 		super.onPause();
 		// instance = null;
 		unregisterReceiverAction();
 		Log.d(LOG_TAG, "onPause instance " + instance);
 	}
-	
+
 	@Override
 	protected void onStop() {
 		Log.d(LOG_TAG, "onPause");
 		super.onStop();
 		instance = null;
 	}
-	
+
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		switch (keyCode) {
@@ -519,7 +485,8 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 
 	private void destorySipStack() {
 		Log.d(LOG_TAG, "<<<<<<<<<<<deInitProgressDialog to show: ");
-		deInitProgressDialog = ProgressDialog.show(MainPageActivity.this, getString(R.string.alert_title_exit),
+		deInitProgressDialog = ProgressDialog.show(MainPageActivity.this,
+				getString(R.string.alert_title_exit),
 				getString(R.string.alert_msg_exiting));
 		deInitProgressDialog.setCancelable(false);
 		Log.d(LOG_TAG, "<<<<<<<<<<<deInitProgressDialog to show: ");
@@ -530,133 +497,77 @@ public class MainPageActivity extends BaseActivity implements OnFocusChangeListe
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(getString(R.string.alert_title));
 		builder.setMessage(getString(R.string.alert_title_ifexit));
-		builder.setPositiveButton(getString(R.string.menu_minialmize), new OnClickListener() {
+		builder.setPositiveButton(getString(R.string.menu_minialmize),
+				new OnClickListener() {
 
-			
-			public void onClick(DialogInterface dialog, int which) {
-				MainPageActivity.this.finish();
-				dialog.dismiss();
-			}
-		});
-		builder.setNegativeButton(getString(R.string.menu_exit), new OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						MainPageActivity.this.finish();
+						dialog.dismiss();
+					}
+				});
+		builder.setNegativeButton(getString(R.string.menu_exit),
+				new OnClickListener() {
 
-			
-			public void onClick(DialogInterface dialog, int which) {
-				StateManager.exitFlag = true;
-				// MainPageActivity.this.finish();
-				dialog.dismiss();
-				// -----add by wangjunhui
-				StateManager.stopNotification();
-				destorySipStack();
-			}
-		});
+					public void onClick(DialogInterface dialog, int which) {
+						StateManager.exitFlag = true;
+						// MainPageActivity.this.finish();
+						dialog.dismiss();
+						// -----add by wangjunhui
+						StateManager.stopNotification();
+						destorySipStack();
+					}
+				});
 		builder.create().show();
 
 	}
 
-	
 	public void onClick(View v) {
 		@SuppressWarnings("rawtypes")
 		Class clazz = null;
 		switch (v.getId()) {
-		case R.id.mainbutton1:
+		case R.id.group:
 			clazz = GroupActivity.class;
 			break;
-		case R.id.mainbutton2:
+		case R.id.dail:
 			clazz = DialActivity.class;
 			break;
-		case R.id.mainbutton3:
+		case R.id.calllog:
 			clazz = CallLogTabActivity.class;
 			break;
-		case R.id.mainbutton4:
+		case R.id.contact:
 			clazz = PBKActivity.class;
 			break;
-		case R.id.mainbutton5:
+		case R.id.message:
 			clazz = MessageActivity.class;
 			break;
-		case R.id.mainbutton6:
+		case R.id.ptt:
+			clazz = PTTActivity.class;
+			break;
+		case R.id.imageSet:
 			clazz = SettingActivity.class;
+			break;
+		case R.id.imageAbout:
+			clazz = AboutActivity.class;
+			break;
+		case R.id.imageExit:
+			askIfExit();
+			break;
+		case R.id.imageRegister:
+			doRegister();
 			break;
 
 		default:
 			break;
 		}
-		Log.d(LOG_TAG, "MainPageActivity -------> " + clazz.getName());
-		Intent intent = new Intent();
-		intent.setClass(getApplicationContext(), clazz);
-		startActivity(intent);
-	}
-
-	
-	public void onFocusChange(View v, boolean hasFocus) {
-		if (hasFocus) {
-			switch (v.getId()) {
-			case R.id.mainbutton1:
-				btnqz.setBackgroundResource(R.drawable.qunzu6);
-				break;
-			case R.id.mainbutton2:
-				btnbh.setBackgroundResource(R.drawable.bohao06);
-				break;
-			case R.id.mainbutton3:
-				btnjl.setBackgroundResource(R.drawable.jilu6);
-				break;
-			case R.id.mainbutton4:
-				btntxl.setBackgroundResource(R.drawable.tongxunlu6);
-				break;
-			case R.id.mainbutton5:
-				btnxx.setBackgroundResource(R.drawable.xx6);
-				break;
-			case R.id.mainbutton6:
-				btnsz.setBackgroundResource(R.drawable.shezhi6);
-				break;
-
-			default:
-				break;
+		if (v.getId() != R.id.imageExit && v.getId() != R.id.imageRegister) {
+			Log.d(LOG_TAG, "MainPageActivity -------> " + clazz.getName());
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), clazz);
+			if (v.getId() == R.id.ptt) {
+				intent.setAction(PTTConstant.ACTION_PTT);
 			}
-		} else {
-			switch (v.getId()) {
-			case R.id.mainbutton1:
-				btnqz.setBackgroundResource(R.drawable.qunzu5);
-				break;
-			case R.id.mainbutton2:
-				btnbh.setBackgroundResource(R.drawable.bohao05);
-				break;
-			case R.id.mainbutton3:
-				btnjl.setBackgroundResource(R.drawable.jilu5);
-				break;
-			case R.id.mainbutton4:
-				btntxl.setBackgroundResource(R.drawable.tongxunlu5);
-				break;
-			case R.id.mainbutton5:
-				btnxx.setBackgroundResource(R.drawable.xx5);
-				break;
-			case R.id.mainbutton6:
-				btnsz.setBackgroundResource(R.drawable.shezhi5);
-				break;
-
-			default:
-				break;
-			}
+			startActivity(intent);
 		}
-	}
-
-	
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		int order = 0;
-
-		menu.clear();
-
-		if (StateManager.getCurrentRegState() == EnumLoginState.ERROR_CODE_NUMBER
-				|| StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
-			menu.add(0, MENU_REGISTER, order++, R.string.menu_register);
-		}
-		//if (pttManager.getCurrentPttState().getStatus() != PTTConstant.PTT_IDLE) {
-		//}
-		menu.add(0, MENU_RETURN_PTT, order++, R.string.menu_return_ptt);
-		menu.add(0, MENU_MINI, order++, R.string.menu_minialmize);
-		menu.add(0, MENU_EXIT, order++, R.string.menu_exit);
-		menu.add(0, MENU_TEST, order++, R.string.aboutpyy);
-		return super.onPrepareOptionsMenu(menu);
 	}
 
 }
