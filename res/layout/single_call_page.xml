@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_default"
     android:layout_height="match_parent" >
 
     <ImageView
@@ -49,9 +50,11 @@
         android:contentDescription="@string/app_name"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:background="@drawable/btn_toolbar"
         android:text="@string/menu_answer"
         android:layout_below="@+id/id_tv_number"
         android:layout_marginTop="82dp"
+        android:textColor="@android:color/black"
         android:layout_toRightOf="@+id/id_tv_duration"
         android:drawableTop="@drawable/ic_answer_call" />
 
@@ -60,7 +63,9 @@
         android:contentDescription="@string/app_name"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:background="@drawable/btn_toolbar"
         android:text="@string/menu_speaker"
+        android:textColor="@android:color/black"
         android:layout_alignBottom="@+id/btn_answer_call"
         android:layout_centerHorizontal="true"
         android:drawableTop="@drawable/ic_sound_call" />
@@ -69,8 +74,10 @@
         android:id="@+id/btn_end_call"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:background="@drawable/btn_toolbar"
         android:layout_alignTop="@+id/btn_sound_call"
         android:layout_marginLeft="19dp"
+        android:textColor="@android:color/black"
         android:layout_toRightOf="@+id/btn_sound_call"
         android:contentDescription="@string/app_name"
         android:drawableTop="@drawable/ic_end_call"

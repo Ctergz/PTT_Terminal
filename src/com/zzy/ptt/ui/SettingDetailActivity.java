@@ -21,7 +21,6 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
@@ -32,11 +31,7 @@ import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputFilter;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -45,7 +40,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -54,15 +48,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzy.ptt.R;
-import com.zzy.ptt.model.EnumLoginState;
 import com.zzy.ptt.model.GroupInfo;
-import com.zzy.ptt.model.SipServer;
-import com.zzy.ptt.model.SipUser;
 import com.zzy.ptt.service.GroupManager;
 import com.zzy.ptt.service.PTTManager;
-import com.zzy.ptt.service.PTTService;
-import com.zzy.ptt.service.StateManager;
-import com.zzy.ptt.service.StateManager.EnumRegByWho;
 import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
@@ -70,6 +58,7 @@ import com.zzy.ptt.util.PTTUtil;
  * @author Administrator
  * 
  */
+@SuppressWarnings("unused")
 public class SettingDetailActivity extends BaseActivity implements OnClickListener,
 		OnSeekBarChangeListener, OnCheckedChangeListener {
 
@@ -77,9 +66,7 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 	private int currentItemId;
 
 	// for register setting
-	private EditText etServerIP, etPort, etUsername,
-			etPassword;
-	private Button btnrergi;
+	
 	private CheckBox cbAutoRegister;
 	private SharedPreferences prefs;
 
@@ -98,7 +85,6 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 	// for system setting
 	private CheckBox cbAutoStart;
 
-	private BroadcastReceiver registerReceiver;
 	private BroadcastReceiver pttReceiver;
 
 	private static final String LOG_TAG = "SettingDetailActivity";
@@ -139,7 +125,7 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 
 		intent = getIntent();
 		currentItemId = intent.getIntExtra(PTTConstant.SETTING_DISPATCH_KEY, 0);
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		
 		audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 		showView(currentItemId);
@@ -150,12 +136,7 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 
 		switch (itemId) {
 		case PTTConstant.SETTING_ITEM_REGISTGER:
-			setContentView(R.layout.register_setting_layout);
-			this.setTitle(getApplicationContext().getString(R.string.setting_register));
-			loadRegisterSettingData();
 			IntentFilter filter = new IntentFilter(PTTConstant.ACTION_REGISTER);
-			addRegReceiver();
-			registerReceiver(registerReceiver, filter);
 			break;
 		case PTTConstant.SETTING_ITEM_TALKING:
 			setContentView(R.layout.call_setting_layout);
@@ -252,79 +233,6 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 		btnCallRing.setOnClickListener(this);
 	}
 
-	private void checkIfDirty(int itemId) {
-		switch (itemId) {
-		case PTTConstant.SETTING_ITEM_REGISTGER:
-			bDirty = checkIfRegisterDirty();
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	private boolean checkIfRegisterDirty() {
-		String oldServerip = prefs.getString(PTTConstant.SP_SERVERIP, "");
-		if (!oldServerip.equals(etServerIP.getText().toString())) {
-			return true;
-		}
-
-		String oldServerport = prefs.getString(PTTConstant.SP_PORT, "");
-		if (!oldServerport.equals(etPort.getText().toString())) {
-			return true;
-		}
-
-		String oldUsername = prefs.getString(PTTConstant.SP_USERNAME, "");
-		if (!oldUsername.equals(etUsername.getText().toString())) {
-			return true;
-		}
-
-		String oldPassword = prefs.getString(PTTConstant.SP_PASSWORD, "");
-		if (!oldPassword.equals(etPassword.getText().toString())) {
-			return true;
-		}
-		return false;
-	}
-
-	private void loadRegisterSettingData() {
-		etServerIP = (EditText) findViewById(R.id.et_serverip1);
-		etUsername = (EditText) findViewById(R.id.et_username);
-		etPassword = (EditText) findViewById(R.id.et_password);
-		etPort = (EditText) findViewById(R.id.et_port);
-		cbAutoRegister = (CheckBox) findViewById(R.id.cb_autoregister);
-		btnrergi = (Button) findViewById(R.id.btn_regi);
-
-		etServerIP.setFilters(new InputFilter[] { new InputFilter.LengthFilter(15) });
-		etUsername.setFilters(new InputFilter[] { new InputFilter.LengthFilter(10) });
-		etPassword.setFilters(new InputFilter[] { new InputFilter.LengthFilter(10) });
-		etPort.setFilters(new InputFilter[] { new InputFilter.LengthFilter(10) });
-
-		SipServer sipServer = PTTUtil.getInstance().getSipServerFromPrefs(prefs);
-		SipUser sipUser = PTTUtil.getInstance().getSipUserFromPrefs(prefs);
-		boolean autoRegister = prefs.getBoolean(PTTConstant.SP_AUTOREGISTER, true);
-
-		cbAutoRegister.setOnCheckedChangeListener(this);
-		cbAutoRegister.setVisibility(View.GONE);
-
-		
-		etServerIP.setText(sipServer.getServerIp());
-		etPort.setText(sipServer.getPort());
-		etUsername.setText(sipUser.getUsername());
-		etPassword.setText(sipUser.getPasswd());
-		cbAutoRegister.setChecked(autoRegister);
-
-		
-		btnrergi.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(doSave()){
-					doReregister();
-				}
-			}
-		});
-	}
-
 	private void loadCallSettingData() {
 
 		// cbAutoAnswer = (CheckBox) findViewById(R.id.cb_auto_answer);
@@ -342,8 +250,7 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 		// add by wangjunhui
 		groupChoseSpinner = (Spinner) findViewById(R.id.group_chose_Spinner);
 		groupChosetv = (TextView) findViewById(R.id.group_chose_tv);
-		sp = PTTService.instance.prefs;
-		editor = sp.edit();
+		
 		lstGroupData = GroupManager.getInstance().getGroupData();
 		lstGroupNum = new ArrayList<String>();
 		currentGroups = new String[lstGroupData.size()];
@@ -399,84 +306,13 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 		}
 	};
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
 
-		int index = 0;
-		switch (currentItemId) {
-		case PTTConstant.SETTING_ITEM_REGISTGER:
-			//menu.add(0, MENU_REREGISTER, index++, R.string.menu_reregister);
-			menu.add(0, MENU_RETURN, index++, R.string.menu_return);
-			break;
-		default:
-			break;
-		}
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		switch (itemId) {
-		case MENU_RETURN:
-			checkIfDirty(currentItemId);
-			if (bDirty) {
-				switch (currentItemId) {
-				case PTTConstant.SETTING_ITEM_REGISTGER:
-					askIfReregister();
-					break;
-				default:
-					break;
-				}
-			}else{
-				SettingDetailActivity.this.finish();
-			}
-			return true;
-		case MENU_REREGISTER:
-			if(doSave()){
-				doReregister();
-			}
-			return true;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	private boolean doSave() {
-		String ip = etServerIP.getText().toString();
-		//check IP addr if correct
-		if(!pttUtil.checkIP(ip)){
-			Toast.makeText(getApplicationContext(), "wrong ip addr", Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		
-		Editor editor = prefs.edit();
-		switch (currentItemId) {
-		case PTTConstant.SETTING_ITEM_REGISTGER:
-			editor.putBoolean(PTTConstant.SP_AUTOREGISTER, cbAutoRegister.isChecked());
-			editor.putString(PTTConstant.SP_SERVERIP, ip);
-			editor.putString(PTTConstant.SP_PORT, etPort.getText().toString());
-			editor.putString(PTTConstant.SP_USERNAME, etUsername.getText().toString());
-			editor.putString(PTTConstant.SP_PASSWORD, etPassword.getText().toString());
-			bDirty = false;
-			break;
-		default:
-			break;
-		}
-		editor.commit();
-		
-		return true;
-	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		instance = null;
 		bDirty = false;
-		if (registerReceiver != null) {
-			unregisterReceiver(registerReceiver);
-		}
 		if (pttReceiver != null) {
 			unregisterReceiver(pttReceiver);
 		}
@@ -489,82 +325,11 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			checkIfDirty(currentItemId);
-			if (bDirty && (currentItemId == PTTConstant.SETTING_ITEM_REGISTGER)) {
-				askIfReregister();
-			} else {
-				this.finish();
-			}
+			this.finish();
 		default:
 			break;
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-
-	private void askIfReregister() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(getString(R.string.alert_title_register));
-		builder.setMessage(getString(R.string.alert_msg_ifreregister));
-		builder.setPositiveButton(getString(R.string.alert_btn_yes),
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// new thread to register, show progress dialog, update
-						// notification and currentState
-						dialog.dismiss();
-						bDirty = false;
-						if(doSave()){
-							doReregister();
-						}
-					}
-				});
-		builder.setNegativeButton(getString(R.string.alert_btn_no),
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						SettingDetailActivity.this.finish();
-					}
-				});
-		builder.create().show();
-	}
-
-	private void doReregister() {
-		progressDialog = AlertDialogManager.getInstance().showProgressDialog(
-				SettingDetailActivity.this, getString(R.string.alert_title_register),
-				getString(R.string.alert_msg_registering));
-		progressDialog.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				if (StateManager.getCurrentRegState() != EnumLoginState.REGISTERE_SUCCESS) {
-					StateManager.setCurrentRegState(EnumLoginState.UNREGISTERED);
-				}
-			}
-		});
-		StateManager.setRegStarter(EnumRegByWho.REG_BY_USER);
-		Intent intent = new Intent(PTTConstant.ACTION_REGISTER);
-		intent.putExtra(PTTConstant.KEY_REREGISTER_FORCE, true);
-		intent.setClass(this, PTTService.class);
-		startService(intent);
-	}
-
-	private void addRegReceiver() {
-		registerReceiver = new BroadcastReceiver() {
-
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				String action = intent.getAction();
-
-				if (PTTConstant.ACTION_REGISTER.equals(action)) {
-					// register state
-					if (progressDialog != null && progressDialog.isShowing()) {
-						AlertDialogManager.getInstance().dismissProgressDialog(progressDialog);
-					}
-				}
-			}
-		};
 	}
 
 	private void addPttReceiver() {

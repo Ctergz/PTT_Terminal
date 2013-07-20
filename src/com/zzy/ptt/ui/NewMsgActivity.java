@@ -59,7 +59,7 @@ public class NewMsgActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.newmsg);
+		setContentView(R.layout.newmsgnew);
 		NewMsgActivity.this.setTitle(getApplicationContext().getString(R.string.titlename));
 		send = (Button) findViewById(R.id.sendnewmsg);
 		exit = (Button) findViewById(R.id.exitnewmsg);

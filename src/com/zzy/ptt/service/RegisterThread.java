@@ -101,6 +101,7 @@ public class RegisterThread extends Thread {
 			} else {
 				if (!pttUtil.checkSettingIsOn()) {
 					pttUtil.regErrorAlert(-1, PTTService.instance.getString(R.string.alert_msg_registerinfo_null));
+					PTTService.instance.setRegisterNull(true);
 				}
 			}
 
@@ -113,6 +114,7 @@ public class RegisterThread extends Thread {
 		if(result == PTTConstant.RETURN_SUCCESS){
 			Intent intent2 = new Intent("com.zzy.action.start");
 			context.sendBroadcast(intent2);
+			PTTService.instance.setRegisterNull(false);
 		}
 		return result;
 	}

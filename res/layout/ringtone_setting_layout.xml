@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_default"
     android:scrollbars="vertical" >
 
         <LinearLayout
@@ -21,9 +22,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:textColor="@android:color/white"
                     android:background="@color/category_background"
                     android:text="@string/setting_call_ring_volume"
-                    android:textColor="@android:color/white"
                     android:textSize="15sp" />
 
                 <SeekBar
@@ -41,9 +42,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:textColor="@android:color/white"
                     android:background="@color/category_background"
                     android:text="@string/setting_call_single_volume"
-                    android:textColor="@android:color/white"
                     android:textSize="15sp" />
 
                 <SeekBar
@@ -61,9 +62,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:textColor="@android:color/white"
                     android:background="@color/category_background"
                     android:text="@string/setting_call_ptt_volume"
-                    android:textColor="@android:color/white"
                     android:textSize="15sp" />
 
                 <SeekBar
@@ -89,9 +90,9 @@
                     android:id="@+id/tv_condition"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
                     android:background="@color/category_background"
                     android:text="@string/setting_condition"
-                    android:textColor="@android:color/white"
                     android:textSize="15sp" />
 
                 <RelativeLayout
@@ -106,6 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="20dp"
+                        android:textColor="@android:color/black"
                         android:text="@string/setting_cond_ring" />
 
                     <CheckBox
@@ -114,6 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
+                        android:textColor="@android:color/black"
                         android:text="@string/setting_cond_virabate" />
                 </RelativeLayout>
 
@@ -138,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:textSize="22sp" />
 
                     <Button
@@ -146,6 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/btn_toolbar"
                         android:text="@string/btn_choose_ringtone" >
                     </Button>
                 </RelativeLayout>

@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +45,7 @@ import com.zzy.ptt.util.PTTUtil;
  * @author Administrator
  * 
  */
+@TargetApi(16)
 public class SettingActivity extends BaseActivity implements OnItemClickListener {
 	private LayoutInflater inflater;
 	
@@ -61,6 +63,7 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 
 	private void showSettingList() {
 		ListView listView = new ListView(this);
+		listView.setBackground(getResources().getDrawable(R.drawable.bg_default));
 		listView.setAdapter(new MyAdapter());
 		setContentView(listView);
 		listView.setOnItemClickListener(this);
@@ -99,9 +102,15 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	}
 
 	private void dispatchPage(long id) {
-		Intent intent = new Intent(this, SettingDetailActivity.class);
-		intent.putExtra(PTTConstant.SETTING_DISPATCH_KEY, (int) id);
-		startActivity(intent);
+		if (id != 1) {
+			Intent intent = new Intent(this, SettingDetailActivity.class);
+			intent.putExtra(PTTConstant.SETTING_DISPATCH_KEY, (int) id);
+			startActivity(intent);
+		}else {
+			Intent intent = new Intent(this,RegisterActivity.class);
+			startActivity(intent);
+			finish();
+		}
 	}
 
 	// add by wangjunhui

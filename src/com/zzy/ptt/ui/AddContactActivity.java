@@ -42,7 +42,7 @@ public class AddContactActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.addnewcontact);
+		setContentView(R.layout.addnewcontactnew);
 		this.setTitle(getApplicationContext().getString(R.string.add_contact) + "");
 		// create database
 		ubc = new ContactUserCl(this);

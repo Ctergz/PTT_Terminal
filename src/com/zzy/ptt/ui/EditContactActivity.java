@@ -44,7 +44,7 @@ public class EditContactActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.detailinfo);
+		this.setContentView(R.layout.detailinfonew);
 		this.setTitle(getApplicationContext().getString(R.string.contact_detail) + "");
 		ubc = new ContactUserCl(this);
 		allNums = ubc.getUserNums();

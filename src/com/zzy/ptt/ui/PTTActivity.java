@@ -129,8 +129,7 @@ public class PTTActivity extends BaseActivity {
 		// disable lockscreen
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.ptt_layout1);
+		setContentView(R.layout.pttlayout);
 
 		instance = this;
 		ptt_group = (TextView) findViewById(R.id.et_current_grp);
@@ -190,6 +189,7 @@ public class PTTActivity extends BaseActivity {
 				getPTTStatus(intent);
 			}
 			if (intent.getAction().equals(PTTConstant.ACTION_PTT_STATUS_DEBUG)) {
+				ptt_info.setVisibility(View.VISIBLE);
 				ptt_info.setText(intent.getStringExtra(PTTConstant.KEY_STATUS_DEBUG_INFO));
 			}
 		}
@@ -299,6 +299,7 @@ public class PTTActivity extends BaseActivity {
 			ptt_speaker.setText(speakerTV + speakerNum);
 //			ptt_status.setText(statusTV + getString(R.string.ptt_applying));
 			ptt_status.setText(statusTV + buildRejectMsg(pttGroupStatus));
+			ptt_info.setVisibility(View.VISIBLE);
 			ptt_info.setText("PTT_REJECTED " + pttGroupStatus.getRejectReason());
 			break;
 		case PTTConstant.PTT_CANCELED:

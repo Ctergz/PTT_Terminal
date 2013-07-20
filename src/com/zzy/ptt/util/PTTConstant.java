@@ -83,6 +83,7 @@ public class PTTConstant {
 	/* intent action */
 	public static final String ACTION_REGISTER = "com.zzy.ptt.action.REGISTER";
 	public static final String ACTION_INIT = "com.zzy.ptt.action.INIT";
+	public static final String ACTION_CANCLE_DIALOG = "com.zzy.ptt.action.cancle.dialog";
 	public static final String ACTION_DEINIT = "com.zzy.ptt.action.DEINIT";
 	public static final String ACTION_GETGROUPDATA = "com.zzy.ptt.action.PULLGRP";
 	public static final String ACTION_ALERT = "com.zzy.ptt.action.ALERT";

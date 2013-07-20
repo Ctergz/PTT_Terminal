@@ -23,14 +23,14 @@
 
             <TableRow
                 android:id="@+id/tableRow1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <RelativeLayout
                     android:id="@+id/group"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/layout_icon_background" >
 
@@ -86,14 +86,14 @@
 
             <TableRow
                 android:id="@+id/tableRow2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <RelativeLayout
                     android:id="@+id/calllog"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/layout_icon_background" >
 
@@ -148,14 +148,14 @@
 
             <TableRow
                 android:id="@+id/tableRow3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <RelativeLayout
                     android:id="@+id/message"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/layout_icon_background" >
 
@@ -272,6 +272,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
             android:src="@drawable/button_icon_register" />
     </RelativeLayout>
 

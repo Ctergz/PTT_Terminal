@@ -20,10 +20,11 @@
     <string name="tview_main_dial">拨号</string>
     <string name="tview_main_sms">信息</string>
     <string name="tview_main_pbk">通讯录</string>
-    <string name="tview_main_calllog">通话记录</string>
     <string name="tview_main_setting">设置</string>
-    <string name="current_group">当前组：</string>
-    <string name="current_num">号码：</string>
+    <string name="tview_main_calllog">通话记录</string>
+    <string name="tview_main_ptt">PTT对讲</string>
+    <string name="current_group">所属群组：</string>
+    <string name="current_num">当前用户：</string>
     <!-- register -->
     <string name="register_not">未注册</string>
     <string name="register_ing">正在注册</string>
@@ -45,6 +46,7 @@
     <string name="sms_send">发送消息</string>
     <!-- setting page -->
     <string name="setting_talking">通话设置</string>
+    <string name="setting_register_item">注册</string>
     <string name="setting_register">注册信息设置</string>
     <string name="setting_alertring">提示音设置</string>
     <string name="setting_system">系统设置</string>
@@ -85,6 +87,7 @@
     <string name="menu_minialmize">最小化</string>
     <string name="menu_exit">彻底退出</string>
     <string name="menu_reregister">重新注册</string>
+    <string name="menu_reregister_new">注册</string>
     <string name="menu_return_ptt">对讲</string>
     <!-- alert -->
     <string name="alert_btn_yes">是</string>

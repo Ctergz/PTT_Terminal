@@ -19,8 +19,6 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		this.setContentView(R.layout.activity_start);
 		ImageView ivlogo1 = (ImageView) this.findViewById(R.id.imagelogo1);
 		TextView ivlogo2 = (TextView) this.findViewById(R.id.textlogo2);

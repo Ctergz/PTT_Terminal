@@ -102,7 +102,7 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 		PTTUtil.getInstance().initOnCreat(this);
 
 		// Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		listView = new ListView(this);
 		lstAllData = new ArrayList<HashMap<String, Object>>();
 		lstMissingData = new ArrayList<HashMap<String, Object>>();
@@ -237,6 +237,7 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 
 	private void initWidgets() {
 		tabHost = getTabHost();
+		tabHost.setBackground(getResources().getDrawable(R.drawable.bg_default));
 		tabHost.addTab(tabHost.newTabSpec(TAB_CALLOUT)
 				.setIndicator("", getResources().getDrawable(R.drawable.ic_call_log_outgoing_call))
 				.setContent(this));

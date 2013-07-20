@@ -106,6 +106,16 @@ public class PTTService extends Service {
 	CharSequence contentText = null;
 	Intent notificationIntent = new Intent();
 	PendingIntent contentIntent;
+	
+	private boolean isRegisterNull;
+
+	public boolean isRegisterNull() {
+		return isRegisterNull;
+	}
+
+	public void setRegisterNull(boolean isRegisterNull) {
+		this.isRegisterNull = isRegisterNull;
+	}
 
 	@Override
 	public IBinder onBind(Intent intent) {

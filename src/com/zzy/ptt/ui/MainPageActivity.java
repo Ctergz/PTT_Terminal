@@ -11,10 +11,13 @@
 
 package com.zzy.ptt.ui;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,6 +40,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzy.ptt.R;
 import com.zzy.ptt.model.EnumLoginState;
@@ -49,8 +53,7 @@ import com.zzy.ptt.service.StateManager.EnumRegByWho;
 import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
-public class MainPageActivity extends Activity implements
-		View.OnClickListener {
+public class MainPageActivity extends Activity implements View.OnClickListener {
 
 	private ProgressDialog initProgressDialog;
 	private ProgressDialog regProgressDialog;
@@ -79,6 +82,7 @@ public class MainPageActivity extends Activity implements
 
 	private SharedPreferences sp;
 	private GroupReceiver groupReceiver;
+	
 
 	public Handler mainPageHandler = new Handler() {
 
@@ -159,7 +163,7 @@ public class MainPageActivity extends Activity implements
 		public void onReceive(Context context, Intent intent) {
 			int state = -1;
 			String action = intent.getAction();
-
+			
 			Log.d(LOG_TAG, "<<<<<<<<<<<Receive action : " + action);
 			if (PTTConstant.ACTION_REGISTER.equals(action)) {
 
@@ -220,8 +224,6 @@ public class MainPageActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.mainpagenew);
 
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -311,8 +313,12 @@ public class MainPageActivity extends Activity implements
 		}
 		if (state == PTTConstant.REG_ED) {
 			titleInfo = PTTUtil.getInstance().getCurrentUserName(this);
-			statusTV.setText(getApplicationContext().getString(R.string.current_group)+ curGrp);
-			statusTV1.setText(getApplicationContext().getString(R.string.current_num)+ titleInfo);
+			statusTV.setText(getApplicationContext().getString(
+					R.string.current_group)
+					+ curGrp);
+			statusTV1.setText(getApplicationContext().getString(
+					R.string.current_num)
+					+ titleInfo);
 		} else {
 			titleInfo = getString(PTTUtil.getInstance().getTitleId(state));
 			statusTV1.setText(titleInfo);
@@ -338,8 +344,12 @@ public class MainPageActivity extends Activity implements
 
 		if (currentState == EnumLoginState.REGISTERE_SUCCESS) {
 			titleInfo = PTTUtil.getInstance().getCurrentUserName(this);
-			statusTV.setText(getApplicationContext().getString(R.string.current_group)+ curGrp);
-			statusTV1.setText(getApplicationContext().getString(R.string.current_num)+ titleInfo);
+			statusTV.setText(getApplicationContext().getString(
+					R.string.current_group)
+					+ curGrp);
+			statusTV1.setText(getApplicationContext().getString(
+					R.string.current_num)
+					+ titleInfo);
 		} else {
 			titleInfo = getString(PTTUtil.getInstance()
 					.getTitleId(currentState));
@@ -353,8 +363,9 @@ public class MainPageActivity extends Activity implements
 		registerReceiver.registerAction(PTTConstant.ACTION_REGISTER);
 		registerReceiver.registerAction(PTTConstant.ACTION_NUMBER_KEY2);
 		registerReceiver.registerAction(PTTConstant.ACTION_DEINIT);
+		
 	}
-
+	
 	private void doRegister() {
 		// start to register and show progress dialog
 		Log.d(LOG_TAG,
@@ -362,7 +373,6 @@ public class MainPageActivity extends Activity implements
 						+ PTTUtil.getInstance().getRegStateString(
 								StateManager.getCurrentRegState()));
 		if (StateManager.getCurrentRegState() != EnumLoginState.REGISTERE_SUCCESS) {
-
 			regProgressDialog = AlertDialogManager.getInstance()
 					.showProgressDialog(this,
 							getString(R.string.alert_title_register),
@@ -443,9 +453,10 @@ public class MainPageActivity extends Activity implements
 		if (StateManager.getCurrentRegState() == EnumLoginState.ERROR_CODE_NUMBER
 				|| StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
 			registerImage.setVisibility(View.VISIBLE);
-		}else {
+		} else {
 			registerImage.setVisibility(View.INVISIBLE);
 		}
+		
 	}
 
 	protected void onPause() {
@@ -453,11 +464,14 @@ public class MainPageActivity extends Activity implements
 		// instance = null;
 		unregisterReceiverAction();
 		Log.d(LOG_TAG, "onPause instance " + instance);
+		if (regProgressDialog != null && regProgressDialog.isShowing()) {
+			regProgressDialog.cancel();
+		}
 	}
 
 	@Override
 	protected void onStop() {
-		Log.d(LOG_TAG, "onPause");
+		Log.d(LOG_TAG, "onStop");
 		super.onStop();
 		instance = null;
 	}
@@ -465,9 +479,9 @@ public class MainPageActivity extends Activity implements
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		switch (keyCode) {
-		case KeyEvent.KEYCODE_BACK:
-			askIfExit();
-			return true;
+		// case KeyEvent.KEYCODE_BACK:
+		// askIfExit();
+		// return true;
 		case PTTConstant.KEYCODE_W_CALL:
 		case KeyEvent.KEYCODE_CALL:
 			// go to call log

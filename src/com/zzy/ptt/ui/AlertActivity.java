@@ -72,6 +72,12 @@ public class AlertActivity extends Activity implements OnClickListener {
 		 * PTTConstant.ERROR_CODE_120128: case PTTConstant.ERROR_CODE_408: if
 		 * (currentError % 2 == 1) count++; break; default: break; }
 		 */
+		if (tvMsg.getText() != null && tvMsg.getText().toString().trim().length() >0) {
+			if (tvMsg.getText().toString().contains(getString(R.string.alert_msg_registerinfo_null))) {
+				Intent intent = new Intent(this,RegisterActivity.class);
+				startActivity(intent);
+			}
+		}
 		this.finish();
 	}
 
@@ -93,6 +99,7 @@ public class AlertActivity extends Activity implements OnClickListener {
 		if (errorMsg == null || errorMsg.trim().length() == 0) {
 			errorMsg = String.valueOf(currentError);
 		}
+		
 		String errorCodeLabel = (bError == true ? getString(R.string.alert_msg_error_code)
 				: getString(R.string.alert_msg_status_code));
 		String errorMsgLabel = (bError == true ? getString(R.string.alert_msg_error_msg)
