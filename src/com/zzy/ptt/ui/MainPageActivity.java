@@ -321,6 +321,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 					+ titleInfo);
 		} else {
 			titleInfo = getString(PTTUtil.getInstance().getTitleId(state));
+			statusTV.setText("");
 			statusTV1.setText(titleInfo);
 		}
 	}
@@ -353,6 +354,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		} else {
 			titleInfo = getString(PTTUtil.getInstance()
 					.getTitleId(currentState));
+			statusTV.setText("");
 			statusTV1.setText(titleInfo);
 		}
 	}
