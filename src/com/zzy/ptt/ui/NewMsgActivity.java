@@ -20,6 +20,8 @@ import android.database.sqlite.SQLiteFullException;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -151,6 +153,10 @@ public class NewMsgActivity extends BaseActivity {
 					if (conn == 0) {
 						try {
 							cl.addNew(message);
+							finish();
+							Toast.makeText(getApplicationContext(),
+									getApplicationContext().getString(R.string.chat_send_success),
+									Toast.LENGTH_LONG).show();
 						} catch (SQLiteFullException e) {
 							// TODO Auto-generated catch block
 							PTTUtil.getInstance().errorAlert(
@@ -204,6 +210,18 @@ public class NewMsgActivity extends BaseActivity {
 				startActivityForResult(intent, 200);
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_ptt, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		finish();
+		return super.onOptionsItemSelected(item);
 	}
 
 	class MySendStatusReveiver extends BroadcastReceiver {

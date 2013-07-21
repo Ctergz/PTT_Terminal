@@ -31,7 +31,10 @@ import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -51,6 +54,7 @@ import com.zzy.ptt.R;
 import com.zzy.ptt.model.GroupInfo;
 import com.zzy.ptt.service.GroupManager;
 import com.zzy.ptt.service.PTTManager;
+import com.zzy.ptt.service.PTTService;
 import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
@@ -58,7 +62,6 @@ import com.zzy.ptt.util.PTTUtil;
  * @author Administrator
  * 
  */
-@SuppressWarnings("unused")
 public class SettingDetailActivity extends BaseActivity implements OnClickListener,
 		OnSeekBarChangeListener, OnCheckedChangeListener {
 
@@ -122,7 +125,7 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 		super.onCreate(savedInstanceState);
 
 		PTTUtil.getInstance().initOnCreat(this);
-
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		intent = getIntent();
 		currentItemId = intent.getIntExtra(PTTConstant.SETTING_DISPATCH_KEY, 0);
 		
@@ -130,6 +133,18 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 
 		showView(currentItemId);
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_ptt, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		finish();
+		return super.onOptionsItemSelected(item);
 	}
 
 	private void showView(int itemId) {
@@ -172,6 +187,9 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 	private void loadRingData() {
 
 		player = new MediaPlayer();
+		
+		sp = PTTService.instance.prefs;
+		editor = sp.edit();
 
 		callVolumeBar = (SeekBar) findViewById(R.id.seekbar_call_single_volume);
 		pttVolumeBar = (SeekBar) findViewById(R.id.seekbar_call_ptt_volume);
@@ -250,7 +268,8 @@ public class SettingDetailActivity extends BaseActivity implements OnClickListen
 		// add by wangjunhui
 		groupChoseSpinner = (Spinner) findViewById(R.id.group_chose_Spinner);
 		groupChosetv = (TextView) findViewById(R.id.group_chose_tv);
-		
+		sp = PTTService.instance.prefs;
+		editor = sp.edit();
 		lstGroupData = GroupManager.getInstance().getGroupData();
 		lstGroupNum = new ArrayList<String>();
 		currentGroups = new String[lstGroupData.size()];

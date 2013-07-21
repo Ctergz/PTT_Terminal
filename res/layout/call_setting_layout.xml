@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:baselineAligned="false"
     android:background="@drawable/bg_default"
+    android:baselineAligned="false"
     android:orientation="vertical" >
 
     <TextView
@@ -20,7 +20,9 @@
     <Spinner
         android:id="@+id/group_chose_Spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
     </Spinner>
 
     <TextView
@@ -38,18 +40,29 @@
         android:id="@+id/id_choosear"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <RadioButton
             android:id="@+id/id_ar_handset"
-            android:text="@string/menu_handset" >
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/menu_handset"
+            android:textColor="@color/category_background" >
         </RadioButton>
 
         <RadioButton
             android:id="@+id/id_ar_speaker"
-            android:text="@string/menu_speaker" >
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/menu_speaker"
+            android:textColor="@color/category_background" >
         </RadioButton>
-
     </RadioGroup>
 
 </LinearLayout>

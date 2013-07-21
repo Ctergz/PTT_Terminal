@@ -18,6 +18,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.os.Bundle;
 import android.util.Xml;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -33,7 +35,6 @@ public class AboutActivity extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.aboutptt);
 		List<VersionInfo> list = parse();
 		VersionInfo currentVersion = list.get(0);
@@ -44,6 +45,18 @@ public class AboutActivity extends BaseActivity {
 		TextView buildtimetv = (TextView) findViewById(R.id.textViewbuildtime);
 		versiontv.setText(versiontv.getText() + version);
 		buildtimetv.setText(getApplicationContext().getString(R.string.aboutv5) + build_time);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_ptt, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		finish();
+		return super.onOptionsItemSelected(item);
 	}
 
 	List<VersionInfo> parse() {

@@ -23,7 +23,7 @@
         android:layout_marginTop="28dp"
         android:text="PTT对讲"
         android:textSize="40dp"
-        android:textColor="#00c"
+        android:textColor="#bf000000"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

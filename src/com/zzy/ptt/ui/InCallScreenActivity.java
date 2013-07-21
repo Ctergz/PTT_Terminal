@@ -37,6 +37,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zzy.ptt.R;
@@ -91,6 +92,8 @@ public class InCallScreenActivity extends BaseActivity {
 	private Button answerBtn,soundBtn,endCallBtn;
 	private boolean isMyHangUP = false;
 	private boolean isOtherHangUP = false;
+	
+	private LinearLayout timeLinearLayout,anserCallLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +104,10 @@ public class InCallScreenActivity extends BaseActivity {
 		// flag |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 		getWindow().addFlags(flag);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.single_call_page);
+		setContentView(R.layout.single_call_pagenew);
+		
+		timeLinearLayout = (LinearLayout) findViewById(R.id.linearlayout_call_time);
+		anserCallLayout = (LinearLayout) findViewById(R.id.linearLayout_answer_call);
 
 		pttUtil.printLog(bDebug, LOG_TAG, ">>>>>>>>>>>>>InCallScreenActivity onCreate22 ");
 		instance = this;
@@ -130,9 +136,9 @@ public class InCallScreenActivity extends BaseActivity {
 		initCallLog();
 		
 		if (callStateManager.getCallState() == PTTConstant.CALL_RINGING) {
-			answerBtn.setVisibility(View.VISIBLE);
+			anserCallLayout.setVisibility(View.VISIBLE);
 		}else{
-			answerBtn.setVisibility(View.INVISIBLE);
+			anserCallLayout.setVisibility(View.GONE);
 		}
 		
 		answerBtn.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +261,7 @@ public class InCallScreenActivity extends BaseActivity {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case MSG_UPDATE_DURATION:
+				timeLinearLayout.setVisibility(View.VISIBLE);
 				tvDuration.setText(PTTUtil.getInstance().duriation2String(duration));
 				break;
 			case MSG_UPDATE_CALLSTATE:
@@ -670,7 +677,7 @@ public class InCallScreenActivity extends BaseActivity {
 		startService(intent);
 		callStateManager.setCallState(PTTConstant.CALL_TALKING);
 		updateCallState(PTTConstant.CALL_TALKING);
-		answerBtn.setVisibility(View.INVISIBLE);
+		anserCallLayout.setVisibility(View.GONE);
 	}
 
 	private void changeAudioRoute() {

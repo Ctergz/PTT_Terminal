@@ -114,6 +114,9 @@ public class RegisterActivity extends BaseActivity {
 					if (progressDialog != null && progressDialog.isShowing()) {
 						AlertDialogManager.getInstance().dismissProgressDialog(progressDialog);
 					}
+					if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS) {
+						finish();
+					}
 				}
 			}
 		};
@@ -235,10 +238,10 @@ public class RegisterActivity extends BaseActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, R.string.menu_return);
+		getMenuInflater().inflate(R.menu.activity_set_register, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

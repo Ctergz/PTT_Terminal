@@ -30,6 +30,7 @@
          android:layout_weight="0.72"
          android:ems="10"
          android:maxLength="120"
+         android:background="@drawable/roundlist_single"
          android:inputType="textMultiLine" >
 
          <requestFocus />
@@ -39,6 +40,8 @@
          android:id="@+id/MessageButton"
          android:layout_width="80dip"
          android:layout_height="wrap_content"
+         android:background="@drawable/btn_toolbar"
+         android:textColor="@android:color/white"
          android:text="@string/sendnewmsg" />
 
  </LinearLayout>

@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -104,6 +106,18 @@ public class DialActivity extends BaseActivity implements OnClickListener {
 		btnNumDelete.setOnClickListener(this);
 		btnSoundCall.setOnClickListener(this);
 		BtnSearch.setOnClickListener(this);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_dail, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		this.finish();
+		return super.onOptionsItemSelected(item);
 	}
 
 	private void makeCall() {

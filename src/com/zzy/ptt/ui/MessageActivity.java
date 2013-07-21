@@ -133,10 +133,11 @@ public class MessageActivity extends BaseActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENUM_NEWSESSION, 0, getApplicationContext().getString(R.string.msg_menu0));
+		//menu.add(0, MENUM_NEWSESSION, 0, getApplicationContext().getString(R.string.msg_menu0));
 		//menu.add(0, MENUM_CALL, 0, getApplicationContext().getString(R.string.contact_call1));
 		//menu.add(0, MENUM_ADDCONTACT, 0, getApplicationContext().getString(R.string.msg_menu1));
 		//menu.add(0, MENUM_DELETESESSION, 0, getApplicationContext().getString(R.string.msg_menu2));
+		getMenuInflater().inflate(R.menu.activity_msg, menu);
 		return true;
 	}
 
@@ -195,9 +196,12 @@ public class MessageActivity extends BaseActivity {
 		int sessionCount = adapter.getCount();
 
 		switch (item.getItemId()) {
-		case MENUM_NEWSESSION:
+		case R.id.msg_add_item:
 			Intent intent0 = new Intent(MessageActivity.this, NewMsgActivity.class);
 			startActivity(intent0);
+			break;
+		case R.id.msg_back_item:
+			finish();
 			break;
 		case MENUM_CALL:
 			if (sessionCount > 0) {

@@ -22,7 +22,7 @@
         android:paddingLeft="10dip"
         android:textSize="20dip"
         android:singleLine="true"
-        android:textColor="#ffffff" />
+        android:textColor="#bf000000" />
 
     <TextView
         android:id="@+id/second_ll_phone"
@@ -34,6 +34,6 @@
         android:gravity="right"
         android:singleLine="true"
         android:paddingRight="40dip"
-        android:textColor="#ffffff" />
+        android:textColor="#bf000000" />
 
 </LinearLayout>

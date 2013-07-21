@@ -50,6 +50,7 @@
                     android:layout_height="45dp"
                     android:inputType="date"
                     android:maxLength="15"
+                    android:hint="@string/hint_serverip"
                     android:textColor="@android:color/black"
                     android:background="@drawable/roundlist_single"
                     android:textSize="18sp" >

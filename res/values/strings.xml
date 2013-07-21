@@ -8,9 +8,8 @@
     <string name="btn_answer">Answer</string>
     <string name="btn_init">Init</string>
     <string name="btn_sendmsg">Send SMS</string>
-    <string name="btn_destory">Destory</string>
+    <string name="btn_destory">Destroy</string>
     <string name="btn_login">Login</string>
-    <string name="btn_call">Call</string>
     <string name="btn_incoming">IncomingCall</string>
     <string name="btn_calllog">callog</string>
     <string name="btn_choose_ringtone">Choose Ring</string>
@@ -60,17 +59,14 @@
     <string name="tview_setting_username">Username</string>
     <string name="tview_setting_password">Password</string>
     <string name="tview_setting_title_register">Register Setting</string>
-    <string name="checkbox_setting_autoanswer">Autoanswer in SingleCall</string>
     <string name="checkbox_setting_autoregister">Auto Register</string>
     <string name="setting_auto_start">Auto Startup</string>
     <string name="setting_current_group">Current PTT Group：</string>
     <string name="setting_current_group_on">    √</string>
     <string name="setting_current_group_off1">Now in Ptt Mode</string>
     <string name="setting_current_group_off2">You can not change the Group now</string>
-    <string name="setting_server5">.</string>
     <string name="setting_register_pw">register need password!</string>
     <string name="setting_register_pw_false">password wrong！</string>
-    <string name="setting_register_ip_false">IP Address wrong！</string>
     <string name="setting_debug_switch">Debug Model</string>
     <!-- notification -->
     <string name="notify_title">PTT</string>
@@ -82,16 +78,13 @@
     <string name="menu_handset">handset</string>
     <string name="menu_answer">answer</string>
     <string name="menu_earphone">earphone</string>
-    <string name="menu_register">register</string>
     <string name="menu_minialmize">minimize</string>
     <string name="menu_exit">exit</string>
-    <string name="menu_reregister">re-register</string>
     <string name="menu_reregister_new">register</string>
-    <string name="menu_return_ptt">Show Ptt</string>
     <!-- alert -->
     <string name="alert_btn_yes">yes</string>
     <string name="alert_btn_no">no</string>
-    <string name="alert_btn_ok">alert_ok</string>
+    <string name="alert_btn_ok">alert_OK</string>
     <string name="alert_btn_cancel">btn_cancel</string>
     <string name="alert_title">alert</string>
     <string name="alert_title_server_null">server info null</string>
@@ -121,14 +114,11 @@
     <string name="alert_msg_error_code">Error Code</string>
     <string name="alert_msg_status_msg">Status Message</string>
     <string name="alert_msg_status_code">Status Code</string>
-    <string name="alert_msg_cm_disconnected">Network is not connecting</string>
     <string name="alert_msg_no_group">No group found</string>
     <string name="alert_msg_fail_ptt">PTT Fail</string>
     <string name="alert_msg_media_fail">Open audio device failed, please restart app mannually</string>
-    <string name="alert_msg_ptt_not_closed">You can not change default group in PTT</string>
     <string name="alert_msg_deleted_from_ptt">Deleted from %1$s，close PTT</string>
     <string name="alert_msg_calllog_save_fail">Failed to save calllog</string>
-    <string name="alert_msg_no_enough_space">No enough disk space, delete some data manually</string>
     <string name="alert_msg_401">Username or password wrong</string>
     <string name="alert_msg_403">Permission denied</string>
     <string name="alert_msg_408">Request timeout</string>
@@ -190,7 +180,7 @@
     <string name="contact_msg">contact_msg</string>
     <string name="contact_del_success">contact_del_success</string>
     <string name="contact_del_faulte">contact_del_faulte</string>
-    <string name="ok">name_ok</string>
+    <string name="ok">name_OK</string>
     <string name="cancle">cancle</string>
     <string name="alert">alert！</string>
     <string name="sure">are you sure delete this contact？</string>
@@ -208,8 +198,6 @@
     <string name="contact_edit_fault">contact_edit_fault</string>
     <string name="contact_del_success1">contact_del_success</string>
     <string name="contact_del_faulte1">contact_del_faulte</string>
-    <string name="contact_name2">contact_name</string>
-    <string name="contact_num2">contact_num</string>
     <string name="contact_delete1">contact_delete</string>
     <!-- chat -->
     <string name="title1">title1</string>
@@ -221,7 +209,7 @@
     <string name="chat_resend">chat_resend</string>
     <string name="chat_careful">chat_careful</string>
     <string name="chat_oper">chat_oper</string>
-    <string name="chat_oper_ok">chat_oper_ok</string>
+    <string name="chat_oper_ok">chat_oper_OK</string>
     <string name="chat_oper_cancle">chat_oper_cancle</string>
     <string name="chat_send_success">chat_send_success</string>
     <string name="chat_send_fault1">chat_send_fault1</string>
@@ -232,7 +220,8 @@
     <string name="msg_menu1">msg_menu1</string>
     <string name="msg_menu2">msg_menu2</string>
     <string name="msg_title1">msg_title1</string>
-    <string name="msg_title2">msg_title1</string>
+    <string name="msg_title2">msg_title2</string>
+    <string name="msg_title3">msg_title3</string>
     <string name="msg_nochat">msg_nochat</string>
     <string name="alert_msg_no_enough_space_my">message receive rstore error!</string>
     <string name="dail_num_length">dail num length limit in 20!</string>
@@ -246,36 +235,25 @@
     <string name="sendnewmsg">sendnewmsg</string>
     <string name="exitnewmsg">exitnewmsg</string>
     <!-- group -->
-    <string name="group_menu0">call</string>
-    <string name="group_menu1">msg</string>
-    <string name="group_menu2">addcontact</string>
     <string name="group_menu3">fresh</string>
-    <string name="group_fresh">group_fresh</string>
     <string name="group_title_group">group</string>
     <string name="group_title_groupmember">groupmember</string>
     <string name="group_call_groupmember">call_groupmember</string>
     <string name="group_msg_groupmember">msg_groupmember</string>
     <string name="group_add_groupmember">add_groupmember</string>
-    <string name="group_fresh_groupmember">fresh_groupmember</string>
     <string name="group_change_to_auto">change_to_auto</string>
     <!-- ptt -->
-    <string name="ptt_call_menu">PTT_Call</string>
     <string name="ptt_status">ptt_status：</string>
     <string name="current_grp">current_grp：</string>
     <string name="current_grp_name">current_grp_name：</string>
     <string name="ptt_talker">ptt_talker：</string>
     <string name="ptt_free">ptt_free</string>
     <string name="ptt_listening">ptt_listening</string>
-    <string name="ptt_init">ptt_init</string>
-    <string name="ptt_calling">ptt calling</string>
     <string name="ptt_speaking">ptt_speaking</string>
     <string name="ptt_waiting">ptt_waiting</string>
-    <string name="ptt_close">ptt_close</string>
     <string name="ptt_applying">Applying</string>
     <string name="ptt_nospeaker">nobody</string>
-    <string name="ptt_cancled">Cancled</string>
     <string name="ptt_rejected">Rejected</string>
-    <string name="ptt_accepted">Accepted</string>
     <string name="ptt_myself">myself</string>
     <string name="ptt_waiting_full">Waiting List Full</string>
     <string name="ptt_waiting_droped">Kick Out</string>
@@ -283,11 +261,9 @@
     <string name="ptt_getting_grp">Requesting Group Info</string>
     <string name="ptt_getting">Requesting</string>
     <!-- about -->
-    <string name="aboutpyy">about ptt</string>
     <string name="aboutv1">PTT–version</string>
     <string name="aboutv2"></string>
     <string name="aboutv3"></string>
     <string name="aboutv4"></string>
     <string name="aboutv5">build time:</string>
-    <string name="ipbind">ip bind to:</string>
 </resources>

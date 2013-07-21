@@ -206,21 +206,23 @@ public class GroupActivity extends BaseActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 3, 0, getApplicationContext().getString(R.string.group_menu3));
+		getMenuInflater().inflate(R.menu.activity_group, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case 3:
+		case R.id.group_refresh_item:
 			GroupManager.getInstance().clearNumMemberMap();
 			requestFreshView();
 			if (GroupManager.getInstance().checkReceiveAll()) {
 				freshView();
 			}
 			break;
-
+		case R.id.group_back_item:
+			this.finish();
+			break;
 		default:
 			break;
 		}

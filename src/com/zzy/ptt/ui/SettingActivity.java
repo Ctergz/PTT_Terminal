@@ -22,18 +22,16 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.zzy.ptt.R;
@@ -45,111 +43,34 @@ import com.zzy.ptt.util.PTTUtil;
  * @author Administrator
  * 
  */
-@TargetApi(16)
-public class SettingActivity extends BaseActivity implements OnItemClickListener {
+public class SettingActivity extends BaseActivity implements OnClickListener {
 	private LayoutInflater inflater;
+	
+	private RelativeLayout registerSetLayout,ringtongSetLayout,talkingSetLayout,systemSetLayout;
 	
 	public static SettingActivity instance = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_setting);
+		
 		instance = this;
+		
+		registerSetLayout = (RelativeLayout) findViewById(R.id.relativelayout_setting_register);
+		ringtongSetLayout = (RelativeLayout) findViewById(R.id.relativelayout_setting_alertring);
+		talkingSetLayout = (RelativeLayout) findViewById(R.id.relativelayout_setting_talking);
+		systemSetLayout = (RelativeLayout) findViewById(R.id.relativelayout_setting_system);
+		
+		registerSetLayout.setOnClickListener(this);
+		ringtongSetLayout.setOnClickListener(this);
+		talkingSetLayout.setOnClickListener(this);
+		systemSetLayout.setOnClickListener(this);
+		
 		inflater = LayoutInflater.from(this);
 		PTTUtil.getInstance().initOnCreat(this);
 
-		showSettingList();
 	}
-
-	private void showSettingList() {
-		ListView listView = new ListView(this);
-		listView.setBackground(getResources().getDrawable(R.drawable.bg_default));
-		listView.setAdapter(new MyAdapter());
-		setContentView(listView);
-		listView.setOnItemClickListener(this);
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
-		View v = inflater.inflate(R.layout.register_pw, null);
-		final EditText pwEditText = (EditText) v.findViewById(R.id.registerpw);
-		List<VersionInfo> list = parse();
-		VersionInfo currentVersion = list.get(2);
-		final String register_pw = currentVersion.getRegister_pw();
-		if (id == PTTConstant.SETTING_ITEM_REGISTGER) {
-			new AlertDialog.Builder(this)
-					.setTitle(getApplicationContext().getString(R.string.setting_register_pw))
-					.setIcon(android.R.drawable.ic_dialog_info)
-					.setView(v)
-					.setPositiveButton(getApplicationContext().getString(R.string.alert_btn_ok),
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									if (pwEditText.getText().toString().trim().equals(register_pw)) {
-										dispatchPage(id);
-									} else {
-										Toast.makeText(getApplicationContext(),
-												getApplicationContext().getString(R.string.setting_register_pw_false),
-												Toast.LENGTH_LONG).show();
-									}
-								}
-							}).setNegativeButton(getApplicationContext().getString(R.string.alert_btn_cancel), null)
-					.show();
-		} else {
-			dispatchPage(id);
-		}
-	}
-
-	private void dispatchPage(long id) {
-		if (id != 1) {
-			Intent intent = new Intent(this, SettingDetailActivity.class);
-			intent.putExtra(PTTConstant.SETTING_DISPATCH_KEY, (int) id);
-			startActivity(intent);
-		}else {
-			Intent intent = new Intent(this,RegisterActivity.class);
-			startActivity(intent);
-			finish();
-		}
-	}
-
-	// add by wangjunhui
-	class MyAdapter extends BaseAdapter {
-		String[] data = { getString(R.string.setting_talking), getString(R.string.setting_register),
-				getString(R.string.setting_alertring), getString(R.string.setting_system) };
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return data.length;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			TextView tv = new TextView(getApplicationContext());
-			tv.setText(data[position]);
-			tv.setHeight(120);
-			tv.setTextSize(40);
-			tv.setTextColor(Color.WHITE);
-			return tv;
-		}
-
-	}
-	
-	
 
 	List<VersionInfo> parse() {
 		InputStream in = null;
@@ -218,5 +139,70 @@ public class SettingActivity extends BaseActivity implements OnItemClickListener
 	protected void onDestroy() {
 		super.onDestroy();
 		instance = null;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_ptt, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		finish();
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onClick(View view) {
+		View v = inflater.inflate(R.layout.register_pw, null);
+		final EditText pwEditText = (EditText) v.findViewById(R.id.registerpw);
+		List<VersionInfo> list = parse();
+		VersionInfo currentVersion = list.get(2);
+		final String register_pw = currentVersion.getRegister_pw();
+		switch (view.getId()) {
+		case R.id.relativelayout_setting_register:
+			new AlertDialog.Builder(this)
+			.setTitle(getApplicationContext().getString(R.string.setting_register_pw))
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setView(v)
+			.setPositiveButton(getApplicationContext().getString(R.string.alert_btn_ok),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							if (pwEditText.getText().toString().trim().equals(register_pw)) {
+								Intent intent = new Intent(SettingActivity.this,RegisterActivity.class);
+								startActivity(intent);
+								finish();
+							} else {
+								Toast.makeText(getApplicationContext(),
+										getApplicationContext().getString(R.string.setting_register_pw_false),
+										Toast.LENGTH_LONG).show();
+							}
+						}
+					}).setNegativeButton(getApplicationContext().getString(R.string.alert_btn_cancel), null)
+			.show();
+			break;
+		case R.id.relativelayout_setting_alertring:
+			Intent intentalertring = new Intent(this, SettingDetailActivity.class);
+			intentalertring.putExtra(PTTConstant.SETTING_DISPATCH_KEY, 2);
+			startActivity(intentalertring);
+			break;
+		case R.id.relativelayout_setting_talking:
+			Intent intenttalking = new Intent(this, SettingDetailActivity.class);
+			intenttalking.putExtra(PTTConstant.SETTING_DISPATCH_KEY, 0);
+			startActivity(intenttalking);
+			break;
+		case R.id.relativelayout_setting_system:
+			Intent intentsystem = new Intent(this, SettingDetailActivity.class);
+			intentsystem.putExtra(PTTConstant.SETTING_DISPATCH_KEY, 3);
+			startActivity(intentsystem);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 }

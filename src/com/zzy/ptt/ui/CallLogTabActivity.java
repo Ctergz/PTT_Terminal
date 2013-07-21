@@ -606,6 +606,9 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.log_back) {
+			finish();
+		}
 		int itemIndex = item.getItemId();
 		HashMap<String, Object> map;
 		if (itemIndex != MENU_DELETE_ALL) {
@@ -652,7 +655,7 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 //			deleteLog(map);
 //			new DBHelper(this).resetIndex();
 //			break;
-		case MENU_DELETE_ALL:
+		case R.id.log_delete_all:
 			if (tabHost.getCurrentTab() == 3) {
 				deleteAllLog();
 				new DBHelper(this).resetIndex();
@@ -669,8 +672,9 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		int order = 0;
-		menu.add(0, MENU_DELETE_ALL, order++, R.string.log_delete_all);
+		//int order = 0;
+		//menu.add(0, MENU_DELETE_ALL, order++, R.string.log_delete_all);
+		getMenuInflater().inflate(R.menu.activity_call_log_tab, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	

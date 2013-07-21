@@ -24,6 +24,7 @@
         android:layout_below="@+id/list"
         android:layout_toLeftOf="@+id/MessageButton"
         android:ems="10"
+        android:background="@drawable/roundlist_single"
         android:inputType="textMultiLine" >
 
         <requestFocus />
@@ -35,6 +36,8 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="@drawable/btn_toolbar"
+         android:textColor="@android:color/white"
         android:text="@string/sendnewmsg" />
 
 </RelativeLayout>

@@ -17,16 +17,16 @@
             android:paddingRight="10dip" >
 
             <RelativeLayout
-                android:id="@+id/relativelayout__current_grp"
+                android:id="@+id/relativelayout_setting_register"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="30dip"
                 android:background="@drawable/roundlist_single"
                 android:paddingLeft="10dip"
                 android:paddingRight="18dip" >
-
+                
                 <TextView
-                    android:id="@+id/et_current_grp"
+                    android:id="@+id/et_setting_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -36,13 +36,23 @@
                     android:focusableInTouchMode="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
-                    android:text="@string/current_grp"
+                    android:text="@string/setting_register"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                <FrameLayout
+                    android:id="@+id/framelayout_setting_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_userreference_arrow_normal" >
+                </FrameLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relativelayout_current_grp_name"
+                android:id="@+id/relativelayout_setting_alertring"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="20dip"
@@ -50,7 +60,7 @@
                 android:paddingLeft="10dip" >
 
                 <TextView
-                    android:id="@+id/et_current_grp_name"
+                    android:id="@+id/et_setting_alertring"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -60,13 +70,24 @@
                     android:focusableInTouchMode="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
-                    android:text="@string/current_grp_name"
+                    android:text="@string/setting_alertring"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                 <FrameLayout
+                     android:id="@+id/framelayout_setting_alertring"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignRight="@+id/et_setting_alertring"
+                     android:layout_alignTop="@+id/et_setting_alertring"
+                     android:layout_marginRight="19dp"
+                     android:background="@drawable/btn_userreference_arrow_normal" >
+                 </FrameLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relativelayout_ptt_talker"
+                android:id="@+id/relativelayout_setting_talking"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="20dip"
@@ -74,7 +95,7 @@
                 android:paddingLeft="10dip" >
 
                 <TextView
-                    android:id="@+id/et_ptt_talker"
+                    android:id="@+id/et_setting_talking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -84,13 +105,24 @@
                     android:focusableInTouchMode="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
-                    android:text="@string/ptt_talker"
+                    android:text="@string/setting_talking"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                 <FrameLayout
+                     android:id="@+id/framelayout_setting_talking"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignRight="@+id/et_setting_talking"
+                     android:layout_alignTop="@+id/et_setting_talking"
+                     android:layout_marginRight="19dp"
+                     android:background="@drawable/btn_userreference_arrow_normal" >
+                 </FrameLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relativelayout_ptt_status"
+                android:id="@+id/relativelayout_setting_system"
                 android:layout_width="fill_parent"
                 android:layout_height="45dip"
                 android:layout_marginTop="20dip"
@@ -98,7 +130,7 @@
                 android:paddingLeft="10dip" >
 
                 <TextView
-                    android:id="@+id/et_ptt_status"
+                    android:id="@+id/et_setting_system"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -108,35 +140,22 @@
                     android:focusableInTouchMode="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
-                    android:text="@string/ptt_status"
+                    android:text="@string/setting_system"
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
+
+                 <FrameLayout
+                     android:id="@+id/framelayout_setting_system"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignRight="@+id/et_setting_system"
+                     android:layout_alignTop="@+id/et_setting_system"
+                     android:layout_marginRight="21dp"
+                     android:background="@drawable/btn_userreference_arrow_normal" >
+                 </FrameLayout>
+
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_ptt_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dip"
-                android:paddingLeft="10dip" >
-
-                <Button
-                    android:id="@+id/btn_pttkey"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/btn_accept_invite"
-                    android:drawableTop="@drawable/ptt_ptt2" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/et_ptt_debuginfo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="#ff0000"
-                android:visibility="gone"
-                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 

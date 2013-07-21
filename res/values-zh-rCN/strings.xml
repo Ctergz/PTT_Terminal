@@ -232,8 +232,9 @@
     <string name="msg_menu0">新建会话</string>
     <string name="msg_menu1">添加联系人</string>
     <string name="msg_menu2">删除会话</string>
-    <string name="msg_title1">当前共有  </string>
+    <string name="msg_title1">共有  </string>
     <string name="msg_title2"> 条会话</string>
+    <string name="msg_title3"> 条会话</string>
     <string name="msg_nochat">当前列表无会话！</string>
     <string name="alert_msg_no_enough_space_my">存储空间不足，将无法存储和接收短信，请手动删除一些数据</string>
     <string name="dail_num_length">号码长度不得超过20位!</string>

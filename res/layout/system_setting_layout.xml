@@ -10,12 +10,18 @@
         android:id="@+id/cb_auto_start"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textColor="@android:color/black"
         android:text="@string/setting_auto_start" />
     <CheckBox
         android:id="@+id/cb_debug_switch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textColor="@android:color/black"
         android:text="@string/setting_debug_switch" />
 

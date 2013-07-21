@@ -292,9 +292,10 @@ public class PBKActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		//menu.add(0, 0, 0, getApplicationContext().getString(R.string.contact_call) + "");
 		//menu.add(0, 1, 0, getApplicationContext().getString(R.string.contact_msg) + "");
-		menu.add(0, 2, 0, getApplicationContext().getString(R.string.contact_add) + "");
+		//menu.add(0, 2, 0, getApplicationContext().getString(R.string.contact_add) + "");
 		//menu.add(0, 3, 0, getApplicationContext().getString(R.string.contact_edit) + "");
 		//menu.add(0, 4, 0, getApplicationContext().getString(R.string.contact_delete) + "");
+		getMenuInflater().inflate(R.menu.activity_contactsl, menu);
 		return true;
 	}
 
@@ -330,10 +331,13 @@ public class PBKActivity extends BaseActivity {
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
-		case 2:
+		case R.id.contact_add_item:
 			Intent it2 = new Intent();
 			it2.setClass(PBKActivity.this, AddContactActivity.class);
 			startActivityForResult(it2, 0);
+			break;
+		case R.id.contact_back_item:
+			finish();
 			break;
 		case 3:
 			if (listID >= 0) {

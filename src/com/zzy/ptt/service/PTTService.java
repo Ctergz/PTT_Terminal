@@ -100,8 +100,8 @@ public class PTTService extends Service {
 	private int mMaxStreams = 8;
 
 	NotificationManager manager;
-	int[] sNotificationImages;
-	Notification notificationPic;
+	//int[] sNotificationImages;
+	//Notification notificationPic;
 	CharSequence contentTitle = null;
 	CharSequence contentText = null;
 	Intent notificationIntent = new Intent();
@@ -158,8 +158,8 @@ public class PTTService extends Service {
 		checkAR();
 
 		manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		sNotificationImages = new int[] { R.drawable.ewin, R.drawable.wifi };
-		notificationPic = new Notification(R.drawable.ewin, null, System.currentTimeMillis());
+		//sNotificationImages = new int[] { R.drawable.ewin, R.drawable.wifi };
+		//notificationPic = new Notification(R.drawable.ewin, null, System.currentTimeMillis());
 		contentIntent = PendingIntent.getActivity(instance, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
 		
 		sendBroadcast(new Intent(PTTConstant.ACTION_PTT_START));
@@ -1539,16 +1539,16 @@ public class PTTService extends Service {
 		this.isPttUIClosed = isPttUIClosed;
 	}
 
-	public void notificationPicture(int temp) {
-
-		notificationPic.flags = Notification.FLAG_ONGOING_EVENT;
-		notificationPic.flags |= Notification.FLAG_NO_CLEAR;
-
-		notificationPic.icon = sNotificationImages[temp];
-		notificationPic.setLatestEventInfo(instance, contentTitle, contentText, contentIntent);
-		// notification.icon;
-		manager.notify(1, notificationPic);
-	}
+//	public void notificationPicture(int temp) {
+//
+//		notificationPic.flags = Notification.FLAG_ONGOING_EVENT;
+//		notificationPic.flags |= Notification.FLAG_NO_CLEAR;
+//
+//		notificationPic.icon = sNotificationImages[temp];
+//		notificationPic.setLatestEventInfo(instance, contentTitle, contentText, contentIntent);
+//		// notification.icon;
+//		manager.notify(1, notificationPic);
+//	}
 
 	public void stopNotificationPicture() {
 
