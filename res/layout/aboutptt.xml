@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_default"
+    android:background="@android:color/background_dark"
     android:orientation="vertical" >
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:paddingTop="80dip"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ptt_icon" />
+        android:src="@drawable/ptt" />
 
     <TextView
         android:id="@+id/textViewversion"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="80dip"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="15sp"
         android:text="@string/aboutv1" />
     <TextView
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="15dip"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="15sp"
         android:text="" />
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="15dip"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:text="@string/aboutv2" />
     <TextView
         android:id="@+id/textView3"
@@ -46,11 +46,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="15dip"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:text="@string/aboutv3" />
     <TextView
         android:id="@+id/textView4"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

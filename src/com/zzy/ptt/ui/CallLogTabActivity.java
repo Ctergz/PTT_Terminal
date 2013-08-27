@@ -237,7 +237,7 @@ public class CallLogTabActivity extends TabActivity implements TabContentFactory
 
 	private void initWidgets() {
 		tabHost = getTabHost();
-		tabHost.setBackground(getResources().getDrawable(R.drawable.bg_default));
+//		tabHost.setBackground(getResources().getDrawable(R.drawable.bg_default));
 		tabHost.addTab(tabHost.newTabSpec(TAB_CALLOUT)
 				.setIndicator("", getResources().getDrawable(R.drawable.ic_call_log_outgoing_call))
 				.setContent(this));

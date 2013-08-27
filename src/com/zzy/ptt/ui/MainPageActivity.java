@@ -11,13 +11,10 @@
 
 package com.zzy.ptt.ui;
 
-import java.text.BreakIterator;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -36,11 +33,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zzy.ptt.R;
 import com.zzy.ptt.model.EnumLoginState;
@@ -74,15 +68,13 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 
 	private TextView statusTV, statusTV1;
 	private ImageView registerImage, setImage, aboutImage, exitImage;
-	private RelativeLayout groupLinearLayout, daiLinearLayout,
-			calllogLinearLayout, contactLinearLayout, messageLinearLayout,
-			setLinearLayout;
+	private ImageView groupLinearLayout, daiLinearLayout, calllogLinearLayout,
+			contactLinearLayout, messageLinearLayout, setLinearLayout;
 
 	public static MainPageActivity instance = null;
 
 	private SharedPreferences sp;
 	private GroupReceiver groupReceiver;
-	
 
 	public Handler mainPageHandler = new Handler() {
 
@@ -163,7 +155,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		public void onReceive(Context context, Intent intent) {
 			int state = -1;
 			String action = intent.getAction();
-			
+
 			Log.d(LOG_TAG, "<<<<<<<<<<<Receive action : " + action);
 			if (PTTConstant.ACTION_REGISTER.equals(action)) {
 
@@ -183,7 +175,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 					PTTService.instance.JNIAddGroupInfo(groupInfos);
 				}
 
-			}else if (PTTConstant.ACTION_INIT.equals(action)) {
+			} else if (PTTConstant.ACTION_INIT.equals(action)) {
 				// init state
 				int initState = intent.getIntExtra(PTTConstant.KEY_INIT_STATE,
 						0);
@@ -224,7 +216,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.mainpagenew);
+		setContentView(R.layout.mainpage);
 
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -275,12 +267,12 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		aboutImage = (ImageView) findViewById(R.id.imageAbout);
 		exitImage = (ImageView) findViewById(R.id.imageExit);
 
-		groupLinearLayout = (RelativeLayout) findViewById(R.id.group);
-		daiLinearLayout = (RelativeLayout) findViewById(R.id.dail);
-		calllogLinearLayout = (RelativeLayout) findViewById(R.id.calllog);
-		contactLinearLayout = (RelativeLayout) findViewById(R.id.contact);
-		messageLinearLayout = (RelativeLayout) findViewById(R.id.message);
-		setLinearLayout = (RelativeLayout) findViewById(R.id.ptt);
+		groupLinearLayout = (ImageView) findViewById(R.id.image_group);
+		daiLinearLayout = (ImageView) findViewById(R.id.image_dail);
+		calllogLinearLayout = (ImageView) findViewById(R.id.image_calllog);
+		contactLinearLayout = (ImageView) findViewById(R.id.image_contact);
+		messageLinearLayout = (ImageView) findViewById(R.id.image_message);
+		setLinearLayout = (ImageView) findViewById(R.id.image_ptt);
 
 		groupLinearLayout.setOnClickListener(this);
 		daiLinearLayout.setOnClickListener(this);
@@ -365,9 +357,9 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		registerReceiver.registerAction(PTTConstant.ACTION_REGISTER);
 		registerReceiver.registerAction(PTTConstant.ACTION_NUMBER_KEY2);
 		registerReceiver.registerAction(PTTConstant.ACTION_DEINIT);
-		
+
 	}
-	
+
 	private void doRegister() {
 		// start to register and show progress dialog
 		Log.d(LOG_TAG,
@@ -458,7 +450,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		} else {
 			registerImage.setVisibility(View.INVISIBLE);
 		}
-		
+
 	}
 
 	protected void onPause() {
@@ -541,22 +533,22 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 		@SuppressWarnings("rawtypes")
 		Class clazz = null;
 		switch (v.getId()) {
-		case R.id.group:
+		case R.id.image_group:
 			clazz = GroupActivity.class;
 			break;
-		case R.id.dail:
+		case R.id.image_dail:
 			clazz = DialActivity.class;
 			break;
-		case R.id.calllog:
+		case R.id.image_calllog:
 			clazz = CallLogTabActivity.class;
 			break;
-		case R.id.contact:
+		case R.id.image_contact:
 			clazz = PBKActivity.class;
 			break;
-		case R.id.message:
+		case R.id.image_message:
 			clazz = MessageActivity.class;
 			break;
-		case R.id.ptt:
+		case R.id.image_ptt:
 			clazz = PTTActivity.class;
 			break;
 		case R.id.imageSet:
@@ -579,7 +571,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 			Log.d(LOG_TAG, "MainPageActivity -------> " + clazz.getName());
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), clazz);
-			if (v.getId() == R.id.ptt) {
+			if (v.getId() == R.id.image_ptt) {
 				intent.setAction(PTTConstant.ACTION_PTT);
 			}
 			startActivity(intent);

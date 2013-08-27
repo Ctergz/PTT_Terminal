@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_default"
+    android:background="@android:color/background_dark"
     android:baselineAligned="false"
     android:orientation="vertical" >
 
@@ -50,7 +50,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/menu_handset"
-            android:textColor="@color/category_background" >
+            android:textColor="@android:color/white" >
         </RadioButton>
 
         <RadioButton
@@ -61,7 +61,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:text="@string/menu_speaker"
-            android:textColor="@color/category_background" >
+            android:textColor="@android:color/white" >
         </RadioButton>
     </RadioGroup>
 

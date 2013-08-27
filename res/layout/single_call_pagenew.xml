@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_default" >
+    android:background="@android:color/background_dark" >
 
     <LinearLayout
         android:id="@+id/linearlayout_call_time"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text=""
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
         <TextView
@@ -52,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="22dp"
                 android:text=""
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
         </LinearLayout>
     </LinearLayout>
@@ -130,11 +130,11 @@
             android:layout_height="80dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/btn_toolbar"
+            android:background="@drawable/button_login_new"
             android:contentDescription="@string/app_name"
             android:drawableTop="@drawable/ic_answer_call"
             android:text="@string/menu_answer"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/background_dark" />
 
         <TextView
             android:id="@+id/textView25"
@@ -157,11 +157,11 @@
             android:layout_height="80dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_toolbar"
+            android:background="@drawable/button_login_new"
             android:contentDescription="@string/app_name"
             android:drawableTop="@drawable/ic_sound_call"
             android:text="@string/menu_speaker"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/background_dark" />
 
         <Button
             android:id="@+id/btn_end_call"
@@ -170,11 +170,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_toolbar"
+            android:background="@drawable/button_login_new"
             android:contentDescription="@string/app_name"
             android:drawableTop="@drawable/ic_end_call"
             android:text="@string/btn_hangup"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/background_dark" />
     </LinearLayout>
 
 </RelativeLayout>

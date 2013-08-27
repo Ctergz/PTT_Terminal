@@ -23,7 +23,7 @@ public class StartActivity extends Activity {
 		ImageView ivlogo1 = (ImageView) this.findViewById(R.id.imagelogo1);
 		TextView ivlogo2 = (TextView) this.findViewById(R.id.textlogo2);
 		AlphaAnimation aa = new AlphaAnimation(0.1f, 1.0f);
-		aa.setDuration(1000);
+		aa.setDuration(500);
 		ivlogo1.startAnimation(aa);
 		ivlogo2.startAnimation(aa);
 		aa.setAnimationListener(new AnimationListener() {

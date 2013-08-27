@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:baselineAligned="false"
-    android:background="@drawable/bg_default"
+    android:background="@android:color/background_dark"
     android:orientation="vertical" >
 
     <CheckBox
@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:text="@string/setting_auto_start" />
     <CheckBox
         android:id="@+id/cb_debug_switch"
@@ -22,7 +22,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:text="@string/setting_debug_switch" />
 
 </LinearLayout>

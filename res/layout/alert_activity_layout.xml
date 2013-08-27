@@ -24,6 +24,7 @@
         android:layout_width="100dip"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_login_new"
         android:text="@string/alert_btn_ok"
         android:textSize="15dip" >
     </Button>
