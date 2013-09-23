@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:textSize="40dp"
-        android:textColor="#bf000000"
+        android:textColor="#bfffffff"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

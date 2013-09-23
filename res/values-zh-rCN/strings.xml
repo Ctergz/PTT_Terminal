@@ -182,7 +182,7 @@
     <string name="contact_save1">联系人数目达到上限，请删除无用的联系人后再添加！</string>
     <string name="contact_save2">内存空间不足,请删除无用的联系人后再添加！</string>
     <!-- PKB -->
-    <string name="contact_total1">共有</string>
+    <string name="contact_total1">共</string>
     <string name="contact_total2">个联系人</string>
     <string name="contact_add">新建</string>
     <string name="contact_delete">删除</string>

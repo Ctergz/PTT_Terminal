@@ -199,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/button_call_bg"
+            android:background="@drawable/button_num_bg"
             android:padding="3dip"
             android:src="@drawable/dial_call"
             android:tag="Call" />

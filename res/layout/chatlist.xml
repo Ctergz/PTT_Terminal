@@ -28,7 +28,7 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
 				android:gravity="top"
-				android:textColor="#bf000000"
+				android:textColor="#bfffffff"
 				android:id="@+id/chat_to_num"
 				/>
 			<TextView 
@@ -36,7 +36,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="top"
-				android:textColor="#bf000000"
+				android:textColor="#bfffffff"
 				android:layout_weight="5"/>
 		</LinearLayout>
 		<LinearLayout 
@@ -48,7 +48,7 @@
 				android:layout_height="30dip"
 				android:layout_weight="1"
 				android:layout_gravity="center"
-				android:textColor="#bf000000"
+				android:textColor="#bfffffff"
 				android:textSize="20dip"
 				android:singleLine="true"
 				android:id="@+id/chat_new_text"
@@ -58,7 +58,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="right"
-				android:textColor="#bf000000"
+				android:textColor="#bfffffff"
 				android:textSize="20dip"
 				android:layout_weight="3"/>
 		</LinearLayout>
