@@ -159,10 +159,10 @@ public class InCallScreenActivity extends BaseActivity {
 				Drawable drawableTopSound = getResources().getDrawable(R.drawable.ic_sound_call);
 				if (callStateManager.currentAudioRoute == PTTConstant.AR_HANDSET) {
 					soundBtn.setText(getString(R.string.menu_handset));
-					soundBtn.setCompoundDrawables(null, drawableTopLiten, null, null);
+					soundBtn.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopLiten, null, null);
 				} else {
 					soundBtn.setText(getString(R.string.menu_speaker));
-					soundBtn.setCompoundDrawables(null, drawableTopSound, null, null);
+					soundBtn.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopSound, null, null);
 				}
 			}
 		});
