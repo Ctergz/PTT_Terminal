@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -154,10 +155,14 @@ public class InCallScreenActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				changeAudioRoute();
+				Drawable drawableTopLiten = getResources().getDrawable(R.drawable.ic_liseon_call);
+				Drawable drawableTopSound = getResources().getDrawable(R.drawable.ic_sound_call);
 				if (callStateManager.currentAudioRoute == PTTConstant.AR_HANDSET) {
 					soundBtn.setText(getString(R.string.menu_handset));
+					soundBtn.setCompoundDrawables(null, drawableTopLiten, null, null);
 				} else {
 					soundBtn.setText(getString(R.string.menu_speaker));
+					soundBtn.setCompoundDrawables(null, drawableTopSound, null, null);
 				}
 			}
 		});
