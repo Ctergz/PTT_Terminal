@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzy.ptt.R;
@@ -20,17 +18,17 @@ public class StartActivity extends Activity {
 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.setContentView(R.layout.activity_start);
-		ImageView ivlogo1 = (ImageView) this.findViewById(R.id.imagelogo1);
 		TextView ivlogo2 = (TextView) this.findViewById(R.id.textlogo2);
 		AlphaAnimation aa = new AlphaAnimation(0.1f, 1.0f);
-		aa.setDuration(500);
-		ivlogo1.startAnimation(aa);
+		aa.setDuration(1000);
+		ivlogo2.setText("°æ±¾ºÅ £ºV3.1.2");
 		ivlogo2.startAnimation(aa);
 		aa.setAnimationListener(new AnimationListener() {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				Intent it = new Intent(StartActivity.this, MainPageActivity.class);
+				Intent it = new Intent(StartActivity.this,
+						MainPageActivity.class);
 				StartActivity.this.startActivity(it);
 				finish();
 			}
