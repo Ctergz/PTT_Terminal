@@ -448,7 +448,7 @@ public class MainPageActivity extends Activity implements View.OnClickListener {
 				|| StateManager.getCurrentRegState() == EnumLoginState.UNREGISTERED) {
 			registerImage.setVisibility(View.VISIBLE);
 		} else {
-			registerImage.setVisibility(View.INVISIBLE);
+			registerImage.setVisibility(View.GONE);
 		}
 
 	}

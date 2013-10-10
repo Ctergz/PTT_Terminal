@@ -10,8 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="97dp"
-        android:textSize="20dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="140dp"
+        android:layout_marginRight="70dp"
+        android:text="@string/version_welcome"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="30dp" />
 
 </RelativeLayout>

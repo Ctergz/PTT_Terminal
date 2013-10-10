@@ -21,7 +21,6 @@ public class StartActivity extends Activity {
 		TextView ivlogo2 = (TextView) this.findViewById(R.id.textlogo2);
 		AlphaAnimation aa = new AlphaAnimation(0.1f, 1.0f);
 		aa.setDuration(1000);
-		ivlogo2.setText("°æ±¾ºÅ £ºV3.1.2");
 		ivlogo2.startAnimation(aa);
 		aa.setAnimationListener(new AnimationListener() {
 
