@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="140dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginRight="78dp"
         android:text="@string/version_welcome"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="30dp" />

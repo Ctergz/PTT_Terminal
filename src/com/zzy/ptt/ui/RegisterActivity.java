@@ -86,22 +86,18 @@ public class RegisterActivity extends BaseActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		IntentFilter filter = new IntentFilter(PTTConstant.ACTION_REGISTER);
 		addRegReceiver();
 		registerReceiver(registerReceiver, filter);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
-		if (registerReceiver != null) {
-			unregisterReceiver(registerReceiver);
-		}
+		unregisterReceiver(registerReceiver);
 	}
-	
+
 	private void addRegReceiver() {
 		registerReceiver = new BroadcastReceiver() {
 
@@ -112,7 +108,8 @@ public class RegisterActivity extends BaseActivity {
 				if (PTTConstant.ACTION_REGISTER.equals(action)) {
 					// register state
 					if (progressDialog != null && progressDialog.isShowing()) {
-						AlertDialogManager.getInstance().dismissProgressDialog(progressDialog);
+						AlertDialogManager.getInstance().dismissProgressDialog(
+								progressDialog);
 					}
 					if (StateManager.getCurrentRegState() == EnumLoginState.REGISTERE_SUCCESS) {
 						finish();
@@ -241,7 +238,7 @@ public class RegisterActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.activity_set_register, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

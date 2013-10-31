@@ -47,7 +47,6 @@ import com.zzy.ptt.exception.PTTException;
 import com.zzy.ptt.model.Message;
 import com.zzy.ptt.proxy.SipProxy;
 import com.zzy.ptt.service.MessageReceiver;
-import com.zzy.ptt.util.PTTConstant;
 import com.zzy.ptt.util.PTTUtil;
 
 /**
@@ -96,20 +95,25 @@ public class ChatActivity extends BaseActivity {
 		 * for (int i = 0; i < list.size(); i++) { msg = list.get(i);
 		 * msg.setReadstatus(READ); cl.updateMsgReadStatus(msg); }
 		 */
-		
+
 		msgBody.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
 				// TODO Auto-generated method stub
 				if (s.toString().length() >= 120) {
-					Toast.makeText(getApplicationContext(),
-							getApplicationContext().getString(R.string.msg_text_length), Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							getApplicationContext(),
+							getApplicationContext().getString(
+									R.string.msg_text_length),
+							Toast.LENGTH_LONG).show();
 				}
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
 				// TODO Auto-generated method stub
 
 			}
@@ -131,22 +135,21 @@ public class ChatActivity extends BaseActivity {
 		this.registerReceiver(receicer2, filter2);
 
 		talkView.setAdapter(adapter);
-		/*talkView.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				listId = arg2;
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-
-			}
-		});*/
+		/*
+		 * talkView.setOnItemSelectedListener(new OnItemSelectedListener() {
+		 * 
+		 * @Override public void onItemSelected(AdapterView<?> arg0, View arg1,
+		 * int arg2, long arg3) { listId = arg2; }
+		 * 
+		 * @Override public void onNothingSelected(AdapterView<?> arg0) {
+		 * 
+		 * } });
+		 */
 		talkView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
 				listId = arg2;
 				registerForContextMenu(arg0);
 				return false;
@@ -168,15 +171,20 @@ public class ChatActivity extends BaseActivity {
 				int readstatus = READ;
 				int sendstatus = INSEND;
 				int thread_id = cl.getThreadidFromAddress(address);
-				msg = new Message(thread_id, address, date, body, type, readstatus, sendstatus);
+				msg = new Message(thread_id, address, date, body, type,
+						readstatus, sendstatus);
 				try {
 					cl.addNew(msg);
 				} catch (SQLiteFullException e) {
-					Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.alert_msg_no_enough_space_my),
+					Toast.makeText(
+							getApplicationContext(),
+							getApplicationContext().getString(
+									R.string.alert_msg_no_enough_space_my),
 							Toast.LENGTH_LONG).show();
 				}
 				try {
-					conn = SipProxy.getInstance().RequestSendMessage(address, body);
+					conn = SipProxy.getInstance().RequestSendMessage(address,
+							body);
 				} catch (PTTException e) {
 					e.printStackTrace();
 				}
@@ -188,13 +196,16 @@ public class ChatActivity extends BaseActivity {
 					intent3.putExtra("sendstatus", 200);
 					sendBroadcast(intent3);
 				} else {
-					Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_connect),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							getApplicationContext(),
+							getApplicationContext().getString(
+									R.string.no_connect), Toast.LENGTH_LONG)
+							.show();
 				}
 
 			}
 		});
-		
+
 		registerForContextMenu(talkView);
 	}
 
@@ -215,24 +226,27 @@ public class ChatActivity extends BaseActivity {
 		adapter.notifyDataSetChanged();
 		talkView.setAdapter(adapter);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.activity_chat, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.chat_delete_item:
 			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(getApplicationContext().getString(R.string.chat_careful));
-			builder.setMessage(getApplicationContext().getString(R.string.chat_oper));
+			builder.setTitle(getApplicationContext().getString(
+					R.string.chat_careful));
+			builder.setMessage(getApplicationContext().getString(
+					R.string.chat_oper));
 			builder.setIcon(android.R.drawable.ic_dialog_alert);
-			builder.setPositiveButton(getApplicationContext().getString(R.string.chat_oper_ok),
+			builder.setPositiveButton(
+					getApplicationContext().getString(R.string.chat_oper_ok),
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -243,7 +257,9 @@ public class ChatActivity extends BaseActivity {
 							ChatActivity.this.finish();
 						}
 					});
-			builder.setNegativeButton(getApplicationContext().getString(R.string.chat_oper_cancle),
+			builder.setNegativeButton(
+					getApplicationContext()
+							.getString(R.string.chat_oper_cancle),
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -260,20 +276,25 @@ public class ChatActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
 		final Message msg = list.get(listId);
 		int type = msg.getType();
-        menu.setHeaderTitle(getApplicationContext().getString(R.string.msg_title3));
-        if (type == TYPEME) {
-			menu.add(0, 0, 0, getApplicationContext().getString(R.string.chat_menu0));
-			menu.add(0, 1, 0, getApplicationContext().getString(R.string.chat_menu1));
-		}else{
-			menu.add(0, 1, 0, getApplicationContext().getString(R.string.chat_menu1));
+		menu.setHeaderTitle(getApplicationContext().getString(
+				R.string.msg_title3));
+		if (type == TYPEME) {
+			menu.add(0, 0, 0,
+					getApplicationContext().getString(R.string.chat_menu0));
+			menu.add(0, 1, 0,
+					getApplicationContext().getString(R.string.chat_menu1));
+		} else {
+			menu.add(0, 1, 0,
+					getApplicationContext().getString(R.string.chat_menu1));
 		}
-    }
-	
+	}
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -285,11 +306,15 @@ public class ChatActivity extends BaseActivity {
 				try {
 					cl.addNew(msg);
 				} catch (SQLiteFullException e1) {
-					Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.alert_msg_no_enough_space_my),
+					Toast.makeText(
+							getApplicationContext(),
+							getApplicationContext().getString(
+									R.string.alert_msg_no_enough_space_my),
 							Toast.LENGTH_LONG).show();
 				}
 				try {
-					conn = SipProxy.getInstance().RequestSendMessage(msg.getNumber(), msg.getBody());
+					conn = SipProxy.getInstance().RequestSendMessage(
+							msg.getNumber(), msg.getBody());
 				} catch (PTTException e) {
 					e.printStackTrace();
 				}
@@ -297,11 +322,16 @@ public class ChatActivity extends BaseActivity {
 					msgBody.setText("");
 					freshListView();
 				} else {
-					Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.no_connect),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(
+							getApplicationContext(),
+							getApplicationContext().getString(
+									R.string.no_connect), Toast.LENGTH_LONG)
+							.show();
 				}
 			} else {
-				Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.chat_resend),
+				Toast.makeText(
+						getApplicationContext(),
+						getApplicationContext().getString(R.string.chat_resend),
 						Toast.LENGTH_LONG).show();
 			}
 			break;
@@ -321,7 +351,8 @@ public class ChatActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			int fresh = intent.getIntExtra("fresh", 0);
-			PTTUtil.getInstance().printLog(true, "ChatActivity>>>>>>>", "MyChatFreshReceicer >>> onReceive");
+			PTTUtil.getInstance().printLog(true, "ChatActivity>>>>>>>",
+					"MyChatFreshReceicer >>> onReceive");
 			Message msg = (Message) intent.getSerializableExtra("newMsg");
 			if (fresh == 200) {
 				MessageReceiver.nm.cancel(UNREAD);
@@ -337,19 +368,27 @@ public class ChatActivity extends BaseActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			sendstatus = intent.getIntExtra("sendstatus", 888);
-			PTTUtil.getInstance().printLog(true, "ChatActivity>>>>>>>", "MyChatStatusReceicer >>> onReceive");
+			PTTUtil.getInstance().printLog(true, "ChatActivity>>>>>>>",
+					"MyChatStatusReceicer >>> onReceive");
+			System.out.println("sendstatus:"+sendstatus);
 			if (sendstatus == 200) {
 				msg.setSendstatus(SENDOK);
 				cl.updateMsgSendStatus(msg);
 				freshListView();
-				Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.chat_send_success),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(
+						getApplicationContext(),
+						getApplicationContext().getString(
+								R.string.chat_send_success), Toast.LENGTH_LONG)
+						.show();
 			} else {
 				Toast.makeText(
 						getApplicationContext(),
-						getApplicationContext().getString(R.string.chat_send_fault1) + caddress
-								+ getApplicationContext().getString(R.string.chat_send_fault2), Toast.LENGTH_LONG)
-						.show();
+						getApplicationContext().getString(
+								R.string.chat_send_fault1)
+								+ caddress
+								+ getApplicationContext().getString(
+										R.string.chat_send_fault2),
+						Toast.LENGTH_LONG).show();
 				msg.setSendstatus(UNSEND);
 				cl.updateMsgSendStatus(msg);
 				freshListView();
@@ -389,14 +428,15 @@ public class ChatActivity extends BaseActivity {
 			addressTV = (TextView) v.findViewById(R.id.messagedetail_row_name);
 			msgtimeTV = (TextView) v.findViewById(R.id.messagedetail_row_date);
 			msgbodyTV = (TextView) v.findViewById(R.id.messagedetail_row_text);
-			ImageView sendstatusimg = (ImageView) v.findViewById(R.id.send_status);
+			ImageView sendstatusimg = (ImageView) v
+					.findViewById(R.id.send_status);
 			String address;
 			if (type == TYPEME) {
 				address = getApplicationContext().getString(R.string.chat_name);
 			} else {
 				address = msg.getNumber();
 			}
-			if (sendstatus == UNSEND) {
+			if (sendstatus == UNSEND && sendstatusimg != null) {
 				sendstatusimg.setBackgroundResource(R.drawable.unsend);
 			}
 			String date = msg.getDate();

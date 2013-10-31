@@ -54,6 +54,7 @@ public class MessageReceiver extends BroadcastReceiver {
 		nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		String action = intent.getAction();
+		System.out.println("action:"+action);
 		if (action.equals(PTTConstant.ACTION_NEW_MESSAGE)) {
 			String address = intent
 					.getStringExtra(PTTConstant.KEY_MESSAGE_NUMBER);
@@ -87,6 +88,7 @@ public class MessageReceiver extends BroadcastReceiver {
 		if (action.equals(PTTConstant.ACTION_MESSAGE_RESULT) && isSend()) {
 			int sendstatus = intent.getIntExtra(PTTConstant.KEY_MESSAGE_RESULT,
 					666);
+			System.out.println("MessageReceiver status:"+sendstatus);
 			Intent intent3 = new Intent();
 			intent3.setAction(SENDSTATUS);
 			intent3.putExtra("sendstatus", sendstatus);

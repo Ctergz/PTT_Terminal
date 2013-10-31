@@ -1087,6 +1087,7 @@ public class PTTService extends Service {
 		Intent intent = new Intent();
 		intent.setAction(PTTConstant.ACTION_MESSAGE_RESULT);
 		intent.putExtra(PTTConstant.KEY_MESSAGE_RESULT, status);
+		System.out.println("JNISendMessageResult status:"+status);
 		this.sendBroadcast(intent);
 	}
 
