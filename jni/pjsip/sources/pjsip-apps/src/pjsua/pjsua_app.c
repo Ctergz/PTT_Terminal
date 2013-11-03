@@ -398,9 +398,11 @@ static void default_config(struct app_config *cfg)
     cfg->rtp_cfg.port = 4000;
     cfg->redir_op = PJSIP_REDIRECT_ACCEPT;
     cfg->duration = NO_LIMIT;
-#ifdef PJSIP_EXTEND_ZZY
-    cfg->duration = 5;
-#endif
+/*
+ * #ifdef PJSIP_EXTEND_ZZY
+ *  cfg->duration = 5;
+ * #endif
+*/
     cfg->wav_id = PJSUA_INVALID_ID;
     cfg->rec_id = PJSUA_INVALID_ID;
     cfg->wav_port = PJSUA_INVALID_ID;
